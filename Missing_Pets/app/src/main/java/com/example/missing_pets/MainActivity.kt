@@ -15,6 +15,8 @@ class MainActivity : ComponentActivity() {
 
         // Gli faccio caricare subito l'attivita' CreatePost
         startActivity(Intent(this, SeePostsActivity::class.java));
+
+        //startActivity(Intent(this, MapActivity::class.java));
     }
 }
 

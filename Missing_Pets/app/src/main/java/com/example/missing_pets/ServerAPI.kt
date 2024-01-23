@@ -1,12 +1,18 @@
 package com.example.missing_pets
 
+import com.google.gson.GsonBuilder
 import com.google.gson.JsonArray
+import com.google.gson.JsonObject
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 
 
 class ServerAPI {
@@ -15,20 +21,22 @@ class ServerAPI {
         @GET("/posts")
         suspend fun postsGet(): JsonArray
 
-        @Headers("Content-Type: application/json")
+        @Multipart
         @POST("/posts")
-        suspend fun postsPost(@Body body: Post): String
+        suspend fun postsPost(@Part("data") data: RequestBody, @Part image: MultipartBody.Part): String
     }
 
     object HelperClass {            // 'object' e' un Singleton
+
+        var gson = GsonBuilder()
+            .setLenient()
+            .create()
         fun getInstance(): ServerAPI {
             val retrofit =
                 Retrofit.Builder().baseUrl("https://maccproject2024.pythonanywhere.com")
-                    .addConverterFactory(GsonConverterFactory.create()) // to convert JSON object to Java object
+                    .addConverterFactory(GsonConverterFactory.create(gson)) // to convert JSON object to Java object
                     .build().create(ServerAPI::class.java)
             return retrofit
         }
     }
-
-
 }

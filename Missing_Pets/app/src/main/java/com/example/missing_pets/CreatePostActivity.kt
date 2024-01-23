@@ -1,12 +1,20 @@
 package com.example.missing_pets
 
+import android.Manifest
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.icu.util.Calendar
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -19,15 +27,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.app.ActivityCompat
 import com.example.missing_pets.ui.theme.Test_Caricamento_AnnuncioTheme
 import kotlinx.coroutines.runBlocking
-
+import java.io.File
+import java.util.Locale
 
 
 class CreatePostActivity : ComponentActivity() {
 
     private var user_id = 0     // verra' preso dinamicamente dall'account che ha fatto il log in
     private var pet_type = 0    // verra' scelto da un dropdown menu, con opzioni associate a valori statici
+
+    private lateinit var photo: AppCompatImageView
+    private lateinit var photoURI: Uri
+    private lateinit var photoFile: File
     private var date = ""
     private var position = ""
     private var description = ""
@@ -109,6 +123,8 @@ class CreatePostActivity : ComponentActivity() {
             verticalArrangement = Arrangement.spacedBy(15.dp)
         ) {
 
+            PhotoField()
+
             // Campo in cui scegliere la data
             DateField(showDateError)
 
@@ -125,7 +141,7 @@ class CreatePostActivity : ComponentActivity() {
 
                     // Crea nuovo post (da sostituire con una cosa non-blocking che mostra una schermata di caricamento)
                     runBlocking{
-                        val res = postsHandler.createPost(user_id, pet_type, date, position, description)
+                        val res = postsHandler.createPost(user_id, pet_type, date, position, description, getPath(photoURI))
                     }
                     // Ritorna alla pagina con tutti i post
                     startActivity(Intent(this@CreatePostActivity, SeePostsActivity::class.java));
@@ -136,10 +152,63 @@ class CreatePostActivity : ComponentActivity() {
         }
     }
 
-    @OptIn(ExperimentalMaterial3Api::class)
+
+    private val READ_STORAGE_PERMISSION_REQUEST_CODE = 41
+    fun checkPermissionToReadExternalStorage(): Boolean {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val result: Int = this.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+            return result == PackageManager.PERMISSION_GRANTED
+        }
+        return false
+    }
+
+    @Throws(Exception::class)
+    fun requestPermissionToReadExternalStorage() {
+        try {
+            ActivityCompat.requestPermissions(
+                (this as Activity?)!!, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                READ_STORAGE_PERMISSION_REQUEST_CODE
+            )
+            Log.d("REQUESTING PERMISSION", "aaa")
+        } catch (e: Exception) {
+            Log.d("ERRORE PERMESSI", ":(((")
+            e.printStackTrace()
+            throw e
+        }
+    }
+
+
+
+    @Composable
+    fun PhotoField() {
+        var text by remember { mutableStateOf("") }
+
+        Column() {
+
+            photo = AppCompatImageView(this@CreatePostActivity)
+
+            Row (
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                Text(
+                    text = "Photo: "
+                )
+                val pickImg = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+                Button(onClick = {
+                    if (!checkPermissionToReadExternalStorage())
+                        requestPermissionToReadExternalStorage()
+                    changeImage.launch(pickImg)
+                }) {
+                    Text(text = "Choose")
+                }
+            }
+        }
+    }
+
+
     @Composable
     fun DateField(showDateError: MutableState<Boolean>) {
-        //var text by remember { mutableStateOf(date) }
+        var text by remember { mutableStateOf("") }
 
         Column() {
             Row (
@@ -147,6 +216,10 @@ class CreatePostActivity : ComponentActivity() {
             ){
                 Text(
                     text = "Date: "
+                )
+                // Campo dove appare la data selezionata
+                Text(
+                    text = text
                 )
                 //val date = remember { mutableStateOf("") }
                 val datePickerDialog = DatePickerDialog(
@@ -160,6 +233,7 @@ class CreatePostActivity : ComponentActivity() {
                         if (day < 10)
                             day_string = "0" + day_string
                         date = "$year-$month_string-$day_string"
+                        text = date
                         Log.d("date", date)
                         showDateError.value = false                   // nascondi messaggio di errore
                     }, current_year, current_month, current_day
@@ -201,6 +275,17 @@ class CreatePostActivity : ComponentActivity() {
                     },
                     label = { Text("Position") }
                 )
+            }
+            Button(onClick = {
+
+                val latitude = 47.6
+                val longitude = -122.3
+                val uri: String = java.lang.String.format(Locale.ENGLISH, "geo:%f,%f", latitude, longitude)
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+                startActivity(intent)
+
+            }) {
+                Text(text = "Choose position on map")
             }
             // Messaggio di errore
             if (showPositionError.value) {
@@ -256,6 +341,36 @@ class CreatePostActivity : ComponentActivity() {
         }
 
         return false
+    }
+
+
+
+    private val changeImage =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {
+            if (it.resultCode == Activity.RESULT_OK) {
+                val data = it.data
+                val imgUri = data?.data
+                photo.setImageURI(imgUri)
+                if (imgUri != null) {
+                    photoURI = imgUri
+                }
+            }
+        }
+
+
+    fun getFile(uri: Uri): File {
+        return File(getPath(uri))
+    }
+
+    fun getPath(uri: Uri?): String {
+        val projection = arrayOf<String>(MediaStore.MediaColumns.DATA)
+        val cursor = managedQuery(uri, projection, null, null, null)
+        val column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA)
+        cursor.moveToFirst()
+        val imagePath = cursor.getString(column_index)
+        return cursor.getString(column_index)
     }
 
 

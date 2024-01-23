@@ -1,7 +1,19 @@
 package com.example.missing_pets
 
+import android.net.Uri
+import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.google.gson.Gson
+import com.google.gson.stream.JsonReader
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.create
+import java.io.File
+
+
 //import com.example.laboratory1.Model.DataModel
 
 data class Post(
@@ -39,20 +51,34 @@ class PostsHandler : ViewModel() {
         return postsList
     }
 
-    suspend fun createPost(user_id:Int, pet_type:Int, date:String, position:String, description:String): Int {
-        var newPost = Post(0, user_id, pet_type, date, position, description)
+
+    suspend fun createPost(user_id:Int, pet_type:Int, date:String, position:String, description:String, photoPath:String): Int {
         var res = -1
+
+        // Prepara post per l'invio
+        var newPost = Post(0, user_id, pet_type, date, position, description)
+        val postToSend = RequestBody.create(MediaType.parse("application/json"), Gson().toJson(newPost))
+
+        // Prepara foto per l'invio
+        val file = File(photoPath)
+        val requestFile = create(MultipartBody.FORM, file)
+        val photoToSend = MultipartBody.Part.createFormData("photo", file.name, requestFile)
+
 
         try {
             // send POST request
-            res = retrofit.postsPost(newPost).toInt()
+            val serverAnswer = retrofit.postsPost(postToSend, photoToSend)
+            Log.d("RISPOSTA", serverAnswer)
+            res = serverAnswer.toInt()
         } catch (e: Exception) {
             // handle exception
-            Log.d("ERRORE SERVER", ":(")
+            Log.d("ERRORE INVIO SERVER", "mo mi sparo")
             e.printStackTrace()
         }
         return res
     }
+
+
 
 
     /*
