@@ -5,8 +5,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 
 // Parametri globali per tutto il progetto
-const val PET_TYPE_DOG: Int = 0
-const val PET_TYPE_CAT: Int = 1
+const val PET_TYPE_DOG: String = "Dog"
+const val PET_TYPE_CAT: String = "Cat"
 
 class MainActivity : ComponentActivity() {
 

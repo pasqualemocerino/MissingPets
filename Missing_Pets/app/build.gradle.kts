@@ -78,4 +78,7 @@ dependencies {
 
     // osmdroid (open source map)
     implementation("org.osmdroid:osmdroid-android:6.1.18")
+
+    // Coil, per caricare le immagini da URL in modo asincrono
+    implementation("io.coil-kt:coil-compose:2.0.0-rc01")
 }

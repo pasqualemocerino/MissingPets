@@ -6,7 +6,10 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -15,9 +18,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import coil.compose.rememberAsyncImagePainter
 import com.example.missing_pets.ui.theme.Test_Caricamento_AnnuncioTheme
 import kotlinx.coroutines.runBlocking
 
@@ -27,21 +33,17 @@ class SeePostsActivity: ComponentActivity() {
     var postsHandler = PostsHandler()
     private var postsList : MutableList<Post> = ArrayList<Post>()
 
-    /*
-    DisplayMetrics displayMetrics = new DisplayMetrics();
-    getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-    int height = displayMetrics.heightPixels;
-    int width = displayMetrics.widthPixels;
-    */
+    // misure dello schermo, per disegnare bene gli elementi (inizializzate dentro onCreate)
+    var screenWidthDp = 0
+    var screenHeightDp = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
 
-        // misure dello schermo, per disegnare bene gli elementi
+        // prendi misure dello schermo
         val configuration: Configuration = this.getResources().getConfiguration()
-        val screenWidthDp: Int = configuration.screenWidthDp
-        val smallestScreenWidthDp: Int = configuration.smallestScreenWidthDp
-        val screenHeightDp: Int = configuration.screenHeightDp
+        screenWidthDp = configuration.screenWidthDp
+        screenHeightDp = configuration.screenHeightDp
 
         // prendi la lista dei post
         runBlocking {
@@ -98,32 +100,55 @@ class SeePostsActivity: ComponentActivity() {
 
     @Composable
     fun PostElement(post: Post) {
-        Column(
-            Modifier
-                .background(Color.White)
-                .fillMaxWidth()
+
+        // DA CAMBIARE in modo che non sia hard coded
+        val photoURL = "https://maccproject2024.pythonanywhere.com/photo?post_id=" + post.post_id.toString()
+
+        Row (
+            horizontalArrangement = Arrangement.spacedBy(5.dp)
         ) {
-            Text(
-                text = "Post " + post.post_id,
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold
+
+            val imageModifier = Modifier
+                .width((screenWidthDp/3.4).dp)
+                .height((screenWidthDp/2.5).dp)
+                .border(BorderStroke(1.dp, Color.Black))
+                .background(Color.White)
+
+            Image(
+                painter = rememberAsyncImagePainter(photoURL),
+                contentDescription = "pet picture :3",
+                modifier = imageModifier,
+                contentScale = ContentScale.Crop
             )
-            Text(
-                text = "Date: " + post.date
-            )
-            Text(
-                text = "Location: " + post.position
-            )
-            Text(
-                text = "Pet type: " + post.pet_type
-            )
-            Text(
-                text = "Description: " + post.description
-            )
-            Text(
-                text = "User: " + post.user_id
-            )
+
+            Column(
+                Modifier
+                    .background(Color.White)
+                    .fillMaxWidth()
+            ) {
+                Text(
+                    text = "Post " + post.post_id,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = "Date: " + post.date
+                )
+                Text(
+                    text = "Location: " + post.position
+                )
+                Text(
+                    text = "Pet type: " + post.pet_type
+                )
+                Text(
+                    text = "Description: " + post.description
+                )
+                Text(
+                    text = "User: " + post.user_id
+                )
+            }
         }
+
 
     }
 }

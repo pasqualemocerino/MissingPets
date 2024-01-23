@@ -11,6 +11,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
@@ -19,11 +20,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -37,12 +41,11 @@ import java.util.Locale
 class CreatePostActivity : ComponentActivity() {
 
     private var user_id = 0     // verra' preso dinamicamente dall'account che ha fatto il log in
-    private var pet_type = 0    // verra' scelto da un dropdown menu, con opzioni associate a valori statici
 
     private lateinit var photo: AppCompatImageView
     private lateinit var photoURI: Uri
-    private lateinit var photoFile: File
     private var date = ""
+    private var pet_type = PET_TYPE_DOG
     private var position = ""
     private var description = ""
 
@@ -127,6 +130,8 @@ class CreatePostActivity : ComponentActivity() {
 
             // Campo in cui scegliere la data
             DateField(showDateError)
+
+            PetTypeField()
 
             // Campo in cui scegliere la posizione
             PositionField(showPositionError)
@@ -257,6 +262,60 @@ class CreatePostActivity : ComponentActivity() {
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
+    fun PetTypeField() {
+        val context = LocalContext.current
+        var expanded by remember { mutableStateOf(false) }
+        val options = arrayOf(PET_TYPE_DOG, PET_TYPE_CAT)
+        var selectedText by remember { mutableStateOf(options[0]) }
+
+        Row (
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            Text(
+                text = "Pet category: "
+            )
+
+            Box(
+                modifier = Modifier
+                    //.fillMaxWidth()
+                    .padding(32.dp)
+            ) {
+                ExposedDropdownMenuBox(
+                    expanded = expanded,
+                    onExpandedChange = {
+                        expanded = !expanded
+                    }
+                ) {
+                    TextField(
+                        value = selectedText,
+                        onValueChange = {},
+                        readOnly = true,
+                        trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
+                        modifier = Modifier.menuAnchor()
+                    )
+                    ExposedDropdownMenu(
+                        expanded = expanded,
+                        onDismissRequest = { expanded = false }
+                    ) {
+                        options.forEach { item ->
+                            DropdownMenuItem(
+                                text = { Text(text = item) },
+                                onClick = {
+                                    selectedText = item
+                                    expanded = false
+                                    pet_type = item
+                                    //Toast.makeText(context, item, Toast.LENGTH_SHORT).show()
+                                }
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
     fun PositionField(showPositionError: MutableState<Boolean>) {
         var text by remember { mutableStateOf(position) }
 
@@ -360,16 +419,11 @@ class CreatePostActivity : ComponentActivity() {
         }
 
 
-    fun getFile(uri: Uri): File {
-        return File(getPath(uri))
-    }
-
     fun getPath(uri: Uri?): String {
         val projection = arrayOf<String>(MediaStore.MediaColumns.DATA)
         val cursor = managedQuery(uri, projection, null, null, null)
         val column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA)
         cursor.moveToFirst()
-        val imagePath = cursor.getString(column_index)
         return cursor.getString(column_index)
     }
 

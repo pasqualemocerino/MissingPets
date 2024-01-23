@@ -1,5 +1,6 @@
 package com.example.missing_pets
 
+import android.media.Image
 import android.net.Uri
 import android.os.Environment
 import android.provider.MediaStore
@@ -8,9 +9,10 @@ import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.google.gson.stream.JsonReader
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.RequestBody.create
+import okhttp3.RequestBody.*
 import java.io.File
 
 
@@ -19,7 +21,7 @@ import java.io.File
 data class Post(
     var post_id: Int,
     var user_id: Int,
-    var pet_type: Int,
+    var pet_type: String,
     var date: String,
     var position: String,
     var description: String,
@@ -41,7 +43,7 @@ class PostsHandler : ViewModel() {
             // itero su tutti i post
             for (obj in json) {
                 val post = obj.asJsonArray
-                postsList.add(Post(post[0].asInt, post[1].asInt, post[2].asInt, post[3].asString, post[4].asString, post[5].asString))
+                postsList.add(Post(post[0].asInt, post[1].asInt, post[2].asString, post[3].asString, post[4].asString, post[5].asString))
             }
         } catch (e: Exception) {
             // handle exception
@@ -52,16 +54,17 @@ class PostsHandler : ViewModel() {
     }
 
 
-    suspend fun createPost(user_id:Int, pet_type:Int, date:String, position:String, description:String, photoPath:String): Int {
+    suspend fun createPost(user_id:Int, pet_type:String, date:String, position:String, description:String, photoPath:String): Int {
         var res = -1
 
         // Prepara post per l'invio
         var newPost = Post(0, user_id, pet_type, date, position, description)
-        val postToSend = RequestBody.create(MediaType.parse("application/json"), Gson().toJson(newPost))
+        //val postToSend = RequestBody.create(MediaType.parse("application/json"), Gson().toJson(newPost))
+        val postToSend = RequestBody.create("application/json".toMediaTypeOrNull(), Gson().toJson(newPost))
 
         // Prepara foto per l'invio
         val file = File(photoPath)
-        val requestFile = create(MultipartBody.FORM, file)
+        val requestFile = RequestBody.create(MultipartBody.FORM, file)
         val photoToSend = MultipartBody.Part.createFormData("photo", file.name, requestFile)
 
 
@@ -79,24 +82,19 @@ class PostsHandler : ViewModel() {
     }
 
 
-
-
     /*
-    fun createPost(user_id:Int, pet_type:Int, date:String, position:String, description:String): Int {
-        var newPost = Post(0, user_id, pet_type, date, position, description)
-        var res = -1
-
-        GlobalScope.launch(Dispatchers.IO) {
-            try {
-                // send POST request
-                res = retrofit.postsPost(newPost).toInt()
-            } catch (e: Exception) {
-                // handle exception
-                Log.d("ERRORE SERVER", ":(")
-                e.printStackTrace()
-            }
+    suspend fun getPhoto(post_id: Int) : Image? {
+        try {
+            // send POST request
+            val image = retrofit.photoGet(post_id)
+            return image
+        } catch (e: Exception) {
+            // handle exception
+            Log.d("ERRORE RICEZIONE FOTO", "sigh")
+            e.printStackTrace()
         }
-        return res
+        return null
     }
     */
+
 }

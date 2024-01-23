@@ -1,5 +1,6 @@
 package com.example.missing_pets
 
+import android.media.Image
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
@@ -13,6 +14,7 @@ import retrofit2.http.Headers
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.Query
 
 
 class ServerAPI {
@@ -24,6 +26,11 @@ class ServerAPI {
         @Multipart
         @POST("/posts")
         suspend fun postsPost(@Part("data") data: RequestBody, @Part image: MultipartBody.Part): String
+
+        /*
+        @GET("/photo")
+        suspend fun photoGet(@Query("post_id") post_id: Int): Image
+        */
     }
 
     object HelperClass {            // 'object' e' un Singleton
