@@ -1,3 +1,6 @@
+import android.content.Context
+import android.content.ContextWrapper
+import android.os.Build
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
@@ -6,11 +9,14 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import com.example.missing_pets.R
+import org.osmdroid.config.Configuration
 import org.osmdroid.views.MapView
+import java.io.File
 
 
 @Composable
 fun rememberMapViewWithLifecycle(): MapView {
+
     val context = LocalContext.current
     val mapView = remember {
         MapView(context).apply {
@@ -42,3 +48,5 @@ fun rememberMapLifecycleObserver(mapView: MapView): LifecycleEventObserver =
             }
         }
     }
+
+

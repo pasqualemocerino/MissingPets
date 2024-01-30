@@ -6,6 +6,7 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.icu.util.Calendar
+import android.location.Location
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -16,9 +17,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
@@ -26,6 +30,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.*
@@ -34,7 +39,9 @@ import androidx.compose.ui.unit.sp
 import androidx.core.app.ActivityCompat
 import com.example.missing_pets.ui.theme.Test_Caricamento_AnnuncioTheme
 import kotlinx.coroutines.runBlocking
+import org.osmdroid.util.GeoPoint
 import java.io.File
+import java.util.Dictionary
 import java.util.Locale
 
 
@@ -43,7 +50,7 @@ class CreatePostActivity : ComponentActivity() {
     private var user_id = 0     // verra' preso dinamicamente dall'account che ha fatto il log in
 
     private lateinit var photo: AppCompatImageView
-    private lateinit var photoURI: Uri
+    private var photoURI: Uri? = null
     private var date = ""
     private var pet_type = PET_TYPE_DOG
     private var position = ""
@@ -52,20 +59,29 @@ class CreatePostActivity : ComponentActivity() {
     // parametri per mettere i valori corretti
     private var descriptionMaxLength = 255          // perche' nel database il campo description e' varchar(255)
 
+    // per gestire la mappa
+    private var mapSelectorDialog = MapSelectorDialog()
 
     // per inviare il nuovo post
-    var postsHandler = PostsHandler()
+    private var postsHandler = PostsHandler()
 
     // per il calendario
-    var calendar = Calendar.getInstance()
-    var current_year = calendar.get(Calendar.YEAR);
-    var current_month = calendar.get(Calendar.MONTH);
-    var current_day = calendar.get(Calendar.DAY_OF_MONTH);
+    private var calendar = Calendar.getInstance()
+    private var current_year = calendar.get(Calendar.YEAR)
+    private var current_month = calendar.get(Calendar.MONTH)
+    private var current_day = calendar.get(Calendar.DAY_OF_MONTH)
+
+    // indici errori
+    val photoErrorIndex = 0
+    val dateErrorIndex = 1
+    val positionErrorIndex = 2
+    val descriptionErrorIndex = 3
+
 
 
     // Funzione chiamata quando l'activity viene creata
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState)
         setContent {
             Test_Caricamento_AnnuncioTheme {
                 // A surface container using the 'background' color from the theme
@@ -94,9 +110,11 @@ class CreatePostActivity : ComponentActivity() {
     fun PageContent() {
 
         // per mostrare messaggi di errore quando i valori messi non sono validi
-        val showDateError: MutableState<Boolean> = remember { mutableStateOf(false) }
-        val showPositionError: MutableState<Boolean> = remember { mutableStateOf(false) }
-        val showDescriptionError: MutableState<Boolean> = remember { mutableStateOf(false) }
+        val photoError: MutableState<Boolean> = remember { mutableStateOf(false) }
+        val dateError: MutableState<Boolean> = remember { mutableStateOf(false) }
+        val positionError: MutableState<Boolean> = remember { mutableStateOf(false) }
+        val descriptionError: MutableState<Boolean> = remember { mutableStateOf(false) }
+        val missingFieldErrors : Array<MutableState<Boolean>> = arrayOf(photoError, dateError, positionError, descriptionError)
 
         Column(
             Modifier
@@ -110,14 +128,14 @@ class CreatePostActivity : ComponentActivity() {
                 fontSize = 30.sp
             )
             // Form
-            Form(showDateError, showPositionError, showDescriptionError)
+            Form(missingFieldErrors)
         }
     }
 
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun Form(showDateError: MutableState<Boolean>, showPositionError: MutableState<Boolean>, showDescriptionError: MutableState<Boolean>,modifier: Modifier = Modifier) {
+    fun Form(missingFieldErrors: Array<MutableState<Boolean>>, modifier: Modifier = Modifier) {
         Column(
             modifier = Modifier
                 .background(Color.White)
@@ -126,15 +144,15 @@ class CreatePostActivity : ComponentActivity() {
             verticalArrangement = Arrangement.spacedBy(15.dp)
         ) {
 
-            PhotoField()
+            PhotoField(missingFieldErrors[photoErrorIndex])
 
             // Campo in cui scegliere la data
-            DateField(showDateError)
+            DateField(missingFieldErrors[dateErrorIndex])
 
             PetTypeField()
 
             // Campo in cui scegliere la posizione
-            PositionField(showPositionError)
+            PositionField(missingFieldErrors[positionErrorIndex])
 
             // Campo in cui scegliere la descrizione
             DescriptionField()
@@ -142,14 +160,14 @@ class CreatePostActivity : ComponentActivity() {
             // Pulsante per creare il post
             Button(onClick = {
                 // Controlla se i campi sono validi
-                if (validateFields(showDateError, showPositionError, showDescriptionError)) {
+                if (validateFields(missingFieldErrors)) {
 
                     // Crea nuovo post (da sostituire con una cosa non-blocking che mostra una schermata di caricamento)
                     runBlocking{
                         val res = postsHandler.createPost(user_id, pet_type, date, position, description, getPath(photoURI))
                     }
                     // Ritorna alla pagina con tutti i post
-                    startActivity(Intent(this@CreatePostActivity, SeePostsActivity::class.java));
+                    startActivity(Intent(this@CreatePostActivity, SeePostsActivity::class.java))
                 }
             }) {
                 Text("Create Post")
@@ -185,10 +203,10 @@ class CreatePostActivity : ComponentActivity() {
 
 
     @Composable
-    fun PhotoField() {
+    fun PhotoField(showPhotoError: MutableState<Boolean>) {
         var text by remember { mutableStateOf("") }
 
-        Column() {
+        Column {
 
             photo = AppCompatImageView(this@CreatePostActivity)
 
@@ -203,9 +221,19 @@ class CreatePostActivity : ComponentActivity() {
                     if (!checkPermissionToReadExternalStorage())
                         requestPermissionToReadExternalStorage()
                     changeImage.launch(pickImg)
+
+                    showPhotoError.value = false     // nascondi messaggio di errore
                 }) {
                     Text(text = "Choose")
                 }
+            }
+            // Messaggio di errore
+            if (showPhotoError.value) {
+                Text(
+                    text = "Please choose a photo.",
+                    fontSize = 14.sp,
+                    color = Color.Red
+                )
             }
         }
     }
@@ -215,7 +243,7 @@ class CreatePostActivity : ComponentActivity() {
     fun DateField(showDateError: MutableState<Boolean>) {
         var text by remember { mutableStateOf("") }
 
-        Column() {
+        Column {
             Row (
                 verticalAlignment = Alignment.CenterVertically
             ){
@@ -319,33 +347,74 @@ class CreatePostActivity : ComponentActivity() {
     fun PositionField(showPositionError: MutableState<Boolean>) {
         var text by remember { mutableStateOf(position) }
 
-        Column() {
+        // Dialog state Manager
+        val dialogState: MutableState<Boolean> = remember {mutableStateOf(false)}
+
+        Column {
             Row (
                 verticalAlignment = Alignment.CenterVertically
             ){
                 Text(
                     text = "Position: "
                 )
-                OutlinedTextField(
-                    value = text,        // il valore mostrato nel campo
-                    onValueChange = {
-                        text = it
-                        position = it
+                // Campo dove appare la posizione selezionata
+                Text(
+                    text = text
+                )
+
+                // Pulsante per aprire la mappa
+                Button(onClick = {
+                    dialogState.value = true
+                }) {
+                    Text(
+                        text = "Choose",
+                        //fontSize = 22.sp
+                    )
+                }
+            }
+
+            // Code to Show and Dismiss Dialog
+            if (dialogState.value) {
+                AlertDialog(
+                    onDismissRequest = { dialogState.value = false },
+                    title = {
+                        Text(text = "Choose the position")
                     },
-                    label = { Text("Position") }
+                    text = {
+                        Box(
+                            modifier = Modifier
+                                .width(300.dp)
+                                .height(330.dp)
+                                .clip(RoundedCornerShape(5.dp))
+                                .border(BorderStroke(4.dp, Color.White))
+                        ) {
+                            mapSelectorDialog.MapSelector(this@CreatePostActivity)
+                        }
+
+                    },
+                    confirmButton = {
+                        Button(
+                            onClick = {
+                                // passagli l'ultima posizione come startLocation
+                                mapSelectorDialog.startLocation = mapSelectorDialog.getPosition().clone()
+
+                                position = mapSelectorDialog.getPositionAsString()
+                                Log.d("pos", position)
+                                text = "selected"   // se no la vera posizione viene troppo lunga
+
+                                showPositionError.value = false     // nascondi messaggio di errore
+                                dialogState.value = false           // chiudi dialog
+                            }
+                        ) {
+                            Text(
+                                text = "Ok",
+                                fontSize = 16.sp
+                            )
+                        }
+                    }
                 )
             }
-            Button(onClick = {
 
-                val latitude = 47.6
-                val longitude = -122.3
-                val uri: String = java.lang.String.format(Locale.ENGLISH, "geo:%f,%f", latitude, longitude)
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
-                startActivity(intent)
-
-            }) {
-                Text(text = "Choose position on map")
-            }
             // Messaggio di errore
             if (showPositionError.value) {
                 Text(
@@ -383,22 +452,24 @@ class CreatePostActivity : ComponentActivity() {
 
 
 
-    fun validateFields(showDateError: MutableState<Boolean>, showPositionError: MutableState<Boolean>, showDescriptionError: MutableState<Boolean>): Boolean {
-        if (date != "" && position != "") {
+    fun validateFields(missingFieldErrors: Array<MutableState<Boolean>>): Boolean {
+
+        // Controlla se c'e' la foto
+        missingFieldErrors[photoErrorIndex].value = (photoURI == null)
+
+        // Controlla se c'e' la foto
+        missingFieldErrors[dateErrorIndex].value = (date == "")
+
+        // Controlla se c'e' la posizione
+        missingFieldErrors[positionErrorIndex].value = (position == "")
+
+
+        if (photoURI != null && date != "" && position != "") {
             if (description == "") {
                 description = " "         // perche' non so se inviare una stringa vuota al DB da' problemi
             }
-            showPositionError.value = false                   // nascondi messaggio di errore
             return true
         }
-
-        if (date == "") {
-            showDateError.value = true;
-        }
-        if (position == "") {
-            showPositionError.value = true;
-        }
-
         return false
     }
 
