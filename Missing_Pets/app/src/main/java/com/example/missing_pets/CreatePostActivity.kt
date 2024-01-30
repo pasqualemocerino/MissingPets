@@ -60,7 +60,7 @@ class CreatePostActivity : ComponentActivity() {
     private var descriptionMaxLength = 255          // perche' nel database il campo description e' varchar(255)
 
     // per gestire la mappa
-    private var mapSelectorDialog = MapSelectorDialog()
+    private lateinit var mapSelectorDialog : MapSelectorDialog
 
     // per inviare il nuovo post
     private var postsHandler = PostsHandler()
@@ -82,6 +82,9 @@ class CreatePostActivity : ComponentActivity() {
     // Funzione chiamata quando l'activity viene creata
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        mapSelectorDialog = MapSelectorDialog(this)
+
         setContent {
             Test_Caricamento_AnnuncioTheme {
                 // A surface container using the 'background' color from the theme
@@ -167,7 +170,8 @@ class CreatePostActivity : ComponentActivity() {
                         val res = postsHandler.createPost(user_id, pet_type, date, position, description, getPath(photoURI))
                     }
                     // Ritorna alla pagina con tutti i post
-                    startActivity(Intent(this@CreatePostActivity, SeePostsActivity::class.java))
+                    //startActivity(Intent(this@CreatePostActivity, SeePostsActivity::class.java))
+                    finish()
                 }
             }) {
                 Text("Create Post")
@@ -388,13 +392,16 @@ class CreatePostActivity : ComponentActivity() {
                                 .clip(RoundedCornerShape(5.dp))
                                 .border(BorderStroke(4.dp, Color.White))
                         ) {
-                            mapSelectorDialog.MapSelector(this@CreatePostActivity)
+                            mapSelectorDialog.MapSelector()
                         }
 
                     },
                     confirmButton = {
                         Button(
                             onClick = {
+                                // Richiedi i permessi per la posizione
+                                requestLocationPermissions()
+
                                 // passagli l'ultima posizione come startLocation
                                 mapSelectorDialog.startLocation = mapSelectorDialog.getPosition().clone()
 
@@ -411,7 +418,16 @@ class CreatePostActivity : ComponentActivity() {
                                 fontSize = 16.sp
                             )
                         }
+                    },dismissButton = {
+                        Button(
+                            onClick = {
+                                mapSelectorDialog.updatePositionWithGPS()
+                            }
+                        ) {
+                            Text("Use GPS")
+                        }
                     }
+
                 )
             }
 
@@ -498,5 +514,40 @@ class CreatePostActivity : ComponentActivity() {
         return cursor.getString(column_index)
     }
 
+
+    fun requestLocationPermissions() {
+        if (ActivityCompat.checkSelfPermission(this.getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this, arrayOf( android.Manifest.permission.ACCESS_FINE_LOCATION), 1);
+
+        } else{
+            //   getLocationfromYourDevice();
+        }
+    }
+
+
+
+    private fun isLocationPermissionGranted(): Boolean {
+        return if (ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(
+                    android.Manifest.permission.ACCESS_FINE_LOCATION,
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION
+                ),
+                1
+            )
+            false
+        } else {
+            true
+        }
+    }
 
 }

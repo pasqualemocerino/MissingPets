@@ -1,29 +1,24 @@
 package com.example.missing_pets
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
-import android.app.Dialog
 import android.content.Context
 import android.location.Location
+import android.os.Looper
+import android.preference.PreferenceManager
 import android.util.Log
-import androidx.activity.compose.setContent
 import androidx.activity.result.ActivityResultLauncher
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.width
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.DialogFragment
-import com.example.missing_pets.ui.theme.Test_Caricamento_AnnuncioTheme
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import org.osmdroid.api.IMapController
+import org.osmdroid.config.Configuration
 import org.osmdroid.events.MapEventsReceiver
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
@@ -31,6 +26,12 @@ import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.MapEventsOverlay
 import org.osmdroid.views.overlay.Marker
 import rememberMapViewWithLifecycle
+import java.io.File
+
+
+// Source:
+// https://github.com/osmdroid/osmdroid/wiki/Incorporating-Location-Updates-Into-an-OSMDroid-Application-(Kotlin)
+// https://github.com/kwesiRutledge/MapOsmdroidKotlinExample/blob/master/app/src/main/java/com/um/feri/cs/pora/mapkotlinexample/MainActivity.kt
 
 class MapSelectorDialog {
 
@@ -38,6 +39,8 @@ class MapSelectorDialog {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var lastLocation: Location? = null
     private var requestingLocationUpdates = false
+    private var locationCallback: LocationCallback
+    private var locationRequest: LocationRequest
 
     lateinit var map: MapView
     var startPoint: GeoPoint = GeoPoint(41.933835, 12.478106)
@@ -48,23 +51,60 @@ class MapSelectorDialog {
 
     var startLocation: GeoPoint? = null
 
-    @Composable
-    fun MapSelector(
-        context: Context
-    ) {
-        /*
-        val appPerms = arrayOf(
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_NETWORK_STATE,
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.INTERNET
-        )
-        activityResultLauncher.launch(appPerms)
-        */
+    constructor(context: Context) {
 
         this.context = context
-        MapView(context, startLocation, ::initMap)
+
+        // Imposta il path della cache
+        Configuration.getInstance().load(context, PreferenceManager.getDefaultSharedPreferences(context))
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
+
+
+        locationRequest = LocationRequest.create()
+        locationRequest.interval = 60000
+        locationRequest.fastestInterval = 5000
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult) {
+                if (locationResult == null) {
+                    return
+                }
+                for (location in locationResult.locations) {
+                    if (location != null) {
+                        //UI updates
+                        updateLocation(location)
+                    }
+                }
+            }
+        }
+
+    }
+
+    fun setCachePath() {    // questa non funziona
+        Log.d("CACHE OSMDROID", "configuring cache path")
+        val osmConf = Configuration.getInstance()
+        val basePath = File(context.cacheDir.absolutePath, "osmdroid")
+        osmConf.osmdroidBasePath = basePath
+        val tileCache = File(osmConf.osmdroidBasePath.absolutePath, "tile")
+        osmConf.osmdroidTileCache = tileCache
+
+    }
+
+    @Composable
+    fun MapSelector() {
+
+        val appPerms = arrayOf(
+            android.Manifest.permission.ACCESS_FINE_LOCATION,
+            //Manifest.permission.ACCESS_NETWORK_STATE,
+            //Manifest.permission.READ_EXTERNAL_STORAGE,
+            //Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            //Manifest.permission.INTERNET
+        )
+        //activityResultLauncher.launch(appPerms)
+
+        MapView(context, ::initMap)
     }
 
 
@@ -73,7 +113,6 @@ class MapSelectorDialog {
     @Composable
     fun MapView(
         context: Context,
-        startLocation: GeoPoint?,
         onLoad: ((context: Context, map: MapView) -> Unit)
     ) {
         val mapViewState = rememberMapViewWithLifecycle()
@@ -100,12 +139,6 @@ class MapSelectorDialog {
         var overlayEvents = MapEventsOverlay(context, mReceiver)
         map.getOverlays().add(overlayEvents)
 
-        /*
-        if (!requestingLocationUpdates) {
-            requestingLocationUpdates = true
-            //startLocationUpdates()
-        }
-        */
 
         mapController = map.controller
         mapController.setZoom(18.5)
@@ -114,32 +147,43 @@ class MapSelectorDialog {
             //Log.d("MAPPA", "using startLocation")
             startPoint = this.startLocation!!
             mapController.setCenter(this.startLocation)
+
+            if (requestingLocationUpdates) stopLocationUpdates()
+            requestingLocationUpdates = false
         }
         else {
             //Log.d("MAPPA", "using initLocation")
-            initLocation(context)
+
+            if (!requestingLocationUpdates) {
+                requestingLocationUpdates = true
+                startLocationUpdates()
+            }
+            initLocation()
         }
 
         marker = null
-        getPositionMarker(context).position = startPoint
+        getPositionMarker().position = startPoint
 
         //map.invalidate()
     }
 
-    private fun initLocation(context: Context) { //call in create
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
-        readLastKnownLocation(context)
+    private fun initLocation() { //call in create
+        readLastKnownLocation()
     }
 
     @SuppressLint("MissingPermission") //permission are checked before
-    fun readLastKnownLocation(context: Context) {
+    fun readLastKnownLocation() {
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
-                location?.let { updateLocation(context, it) }
+                location?.let {
+                    updateLocation(it)
+                    if (requestingLocationUpdates) stopLocationUpdates()   // quando hai ottenuto la posizione smetti di cercarla
+                    requestingLocationUpdates = false
+                }
             }
     }
 
-    fun updateLocation(context: Context, newLocation: Location) {
+    fun updateLocation(newLocation: Location) {
         lastLocation = newLocation
 
         //GUI, MAP TODO
@@ -151,13 +195,17 @@ class MapSelectorDialog {
         startPoint.longitude = newLocation.longitude
         startPoint.latitude = newLocation.latitude
         mapController.setCenter(startPoint)
-        getPositionMarker(context).position = startPoint
+        getPositionMarker().position = startPoint
+
+
+        if (requestingLocationUpdates) stopLocationUpdates()   // quando hai ottenuto la posizione smetti di cercarla
+        requestingLocationUpdates = false
 
         //map.invalidate()
     }
 
 
-    fun updateLocation(context: Context, newLocation: GeoPoint) {
+    fun updateLocation(newLocation: GeoPoint) {
         lastLocation?.longitude = newLocation.longitude
         lastLocation?.latitude = newLocation.latitude
 
@@ -169,13 +217,13 @@ class MapSelectorDialog {
         mapController.animateTo(startPoint)         // sposta in modo fluido
 
         // Posiziona il marker sul punto cliccato
-        getPositionMarker(context).position = startPoint
+        getPositionMarker().position = startPoint
 
         //map.invalidate()
     }
 
 
-    private fun getPositionMarker(context: Context): Marker { //Singelton
+    private fun getPositionMarker(): Marker { //Singelton
         if (marker == null) {
             marker = Marker(map)
             marker!!.title = "Here I am"
@@ -185,6 +233,28 @@ class MapSelectorDialog {
         }
         return marker!!
     }
+
+    @SuppressLint("MissingPermission")
+    private fun startLocationUpdates() { //onResume
+
+        LocationServices.getFusedLocationProviderClient(context)
+            .requestLocationUpdates(locationRequest, locationCallback, null)
+    }
+
+    private fun stopLocationUpdates() {
+        fusedLocationClient.removeLocationUpdates(locationCallback)
+    }
+
+    @SuppressLint("MissingPermission")
+    fun updatePositionWithGPS() {
+        //readLastKnownLocation()
+
+        if (!requestingLocationUpdates) {
+            requestingLocationUpdates = true
+            startLocationUpdates()
+        }
+    }
+
 
     fun getPosition(): GeoPoint {
         return startPoint
@@ -199,22 +269,22 @@ class MapSelectorDialog {
 
 class MyMapEventsReceiver : MapEventsReceiver {
 
-    private var callback : (context: Context, position: GeoPoint) -> Unit
+    private var callback : (position: GeoPoint) -> Unit
     private lateinit var context: Context
 
-    constructor(context:Context, callback: (context: Context, position: GeoPoint) -> Unit) : super() {
+    constructor(context:Context, callback: (position: GeoPoint) -> Unit) : super() {
         this.context = context
         this.callback = callback
     }
     override fun singleTapConfirmedHelper(p: GeoPoint): Boolean {
         Log.d("posizione", p.toString())
-        callback(context, p)
+        callback(p)
         return true
     }
 
     override fun longPressHelper(p: GeoPoint): Boolean {
         //Log.d("posizione", p.toString())
-        callback(context, p)
+        callback(p)
         return true
     }
 }

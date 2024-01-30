@@ -53,8 +53,6 @@ const val PET_TYPE_CAT: String = "Cat"
 
 class MainActivity : ComponentActivity() {
 
-    var mapSelectorDialog = MapSelectorDialog()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -75,83 +73,13 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    mapDialogButton()
+                    //mapDialogButton()
                 }
             }
         }
         */
     }
 
-
-    @Composable
-    fun mapDialogButton() {
-        val context: Context = LocalContext.current
-
-
-        // Dialog state Manager
-        val dialogState: MutableState<Boolean> = remember {
-            mutableStateOf(false)
-        }
-
-        // Code to Show and Dismiss Dialog
-        if (dialogState.value) {
-            AlertDialog(
-                onDismissRequest = { dialogState.value = false },
-                title = {
-                    Text(text = "Choose the position")
-                },
-                text = {
-                    Box(
-                        modifier = Modifier
-                            .width(300.dp)
-                            .height(330.dp)
-                            .clip(RoundedCornerShape(5.dp))
-                            .border(BorderStroke(4.dp, Color.White))
-                    ) {
-                        //mapSelectorDialog.reloadMarker()
-                        mapSelectorDialog.MapSelector(context)
-                    }
-
-                },
-                confirmButton = {
-                    Button(
-                        onClick = {
-                            val pos = mapSelectorDialog.getPositionAsString()
-                            Log.d("pos", pos)
-                        }
-                    ) {
-                        Text(
-                            text = "Confirm",
-                            fontSize = 16.sp
-                            )
-                    }
-                }
-                //properties = DialogProperties(
-                //    dismissOnBackPress = false,
-                //    dismissOnClickOutside = false
-                //)
-            )
-            //dvm.doSomethingMore()
-        } else {
-            //Toast.makeText(ctx, "Dialog Closed", Toast.LENGTH_SHORT).show()
-            //dvm.doSomething()
-        }
-
-        // Show UI - In this case, we will be using just to show button
-        Row(
-            modifier = Modifier
-                .fillMaxHeight(1f)
-                .fillMaxWidth(1f),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Button(onClick = {
-                dialogState.value = true
-            }) {
-                Text(text = "Show Dialog", fontSize = 22.sp)
-            }
-        }
-    }
 
     private fun fixCacheError(contextWrapper: ContextWrapper) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
