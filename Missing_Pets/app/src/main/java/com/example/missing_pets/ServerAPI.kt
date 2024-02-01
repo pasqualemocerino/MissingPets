@@ -31,6 +31,7 @@ class ServerAPI {
         @GET("/photo")
         suspend fun photoGet(@Query("post_id") post_id: Int): Image
         */
+
     }
 
     object HelperClass {            // 'object' e' un Singleton

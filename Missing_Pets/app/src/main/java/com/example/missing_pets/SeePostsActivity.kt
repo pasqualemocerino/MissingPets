@@ -15,6 +15,10 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,7 +29,9 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
 import com.example.missing_pets.ui.theme.Test_Caricamento_AnnuncioTheme
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.*
 
 class SeePostsActivity: ComponentActivity() {
 
@@ -45,11 +51,14 @@ class SeePostsActivity: ComponentActivity() {
         screenWidthDp = configuration.screenWidthDp
         screenHeightDp = configuration.screenHeightDp
 
-        // prendi la lista dei post
+
+
+        /*
         runBlocking {
             postsList = postsHandler.getAll()
         }
-        Log.d("posts", postsList.toString())
+        */
+
 
         setContent {
             Test_Caricamento_AnnuncioTheme {
@@ -72,19 +81,23 @@ class SeePostsActivity: ComponentActivity() {
                             fontSize = 30.sp
                         )
 
-                        // Lista dei post
-                        Column(
-                            Modifier
-                                .heightIn(0.dp, (screenHeightDp * 0.8f).dp)
-                                .verticalScroll(rememberScrollState()),
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.spacedBy(10.dp)   // per lasciare spazio tra un elemento e l'altro
-                        ) {
-                            // aggiungi un elemento per ogni post
-                            for (i:Post in postsList) {
-                                PostElement(i)
+                        // Per mostrare la schermata di caricamento
+                        var loading = remember { mutableStateOf(true) }
+
+                        // Prendi la lista dei post in una coroutine (asincrono)
+                        LaunchedEffect(Unit) {
+                            withContext(Dispatchers.IO) {
+                                CoroutineScope(Dispatchers.IO).launch {
+                                    runBlocking {
+                                        postsList = postsHandler.getAll()
+                                    }
+                                    loading.value = false
+                                }
                             }
                         }
+
+                        // Lista dei post o schermata di caricamento, a seconda del valore di loading
+                        PostsListOrLoading(loading)
 
                         // Pulsante per andare alla pagina dove creare un nuovo post
                         Button(onClick = {
@@ -94,6 +107,42 @@ class SeePostsActivity: ComponentActivity() {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    @Composable
+    fun PostsListOrLoading(loading:MutableState<Boolean>) {
+
+        val heightOfSection = (screenHeightDp * 0.8f).dp
+
+        // Schermata di caricamento
+        if (loading.value) {
+            Box(
+                modifier = Modifier.height(heightOfSection)
+            ) {
+                CircularProgressIndicator(
+                    modifier = Modifier
+                        .width(64.dp)
+                        .align(Alignment.Center),
+                    color = MaterialTheme.colorScheme.secondary,
+                    //trackColor = MaterialTheme.colorScheme.surfaceVariant,
+                )
+            }
+            return
+        }
+
+        // Lista dei post
+        Column(
+            Modifier
+                .heightIn(0.dp, heightOfSection)
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(10.dp)   // per lasciare spazio tra un elemento e l'altro
+        ) {
+            // aggiungi un elemento per ogni post
+            for (i:Post in postsList) {
+                PostElement(i)
             }
         }
     }
@@ -109,8 +158,8 @@ class SeePostsActivity: ComponentActivity() {
         ) {
 
             val imageModifier = Modifier
-                .width((screenWidthDp/3.4).dp)
-                .height((screenWidthDp/2.5).dp)
+                .width((screenWidthDp / 3.4).dp)
+                .height((screenWidthDp / 2.5).dp)
                 .border(BorderStroke(1.dp, Color.Black))
                 .background(Color.White)
 
@@ -135,7 +184,7 @@ class SeePostsActivity: ComponentActivity() {
                     text = "Date: " + post.date
                 )
                 Text(
-                    text = "Location: " + post.position
+                    text = "Location: " + post.address
                 )
                 Text(
                     text = "Pet type: " + post.pet_type
@@ -149,6 +198,6 @@ class SeePostsActivity: ComponentActivity() {
             }
         }
 
-
     }
+
 }

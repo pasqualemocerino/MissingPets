@@ -261,7 +261,8 @@ class MapSelectorDialog {
     }
 
     fun getPositionAsString(): String {
-        return "(" + startPoint.latitude.toString() + ", " + startPoint.longitude.toString() + ")"
+        //return "(" + startPoint.latitude.toString() + ", " + startPoint.longitude.toString() + ")"
+        return startPoint.latitude.toString() + "," + startPoint.longitude.toString()
     }
 }
 

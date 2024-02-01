@@ -38,7 +38,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.app.ActivityCompat
 import com.example.missing_pets.ui.theme.Test_Caricamento_AnnuncioTheme
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import org.osmdroid.util.GeoPoint
 import java.io.File
 import java.util.Dictionary
@@ -50,6 +54,7 @@ class CreatePostActivity : ComponentActivity() {
     private var user_id = 0     // verra' preso dinamicamente dall'account che ha fatto il log in
 
     private lateinit var photo: AppCompatImageView
+    private var petName = ""
     private var photoURI: Uri? = null
     private var date = ""
     private var pet_type = PET_TYPE_DOG
@@ -57,13 +62,17 @@ class CreatePostActivity : ComponentActivity() {
     private var description = ""
 
     // parametri per mettere i valori corretti
-    private var descriptionMaxLength = 255          // perche' nel database il campo description e' varchar(255)
+    private val descriptionMaxLength = 255          // perche' nel database il campo description e' varchar(255)
+    private val petNameMaxLength = 20
 
     // per gestire la mappa
     private lateinit var mapSelectorDialog : MapSelectorDialog
 
     // per inviare il nuovo post
     private var postsHandler = PostsHandler()
+
+    // per mostrare la schermata di caricamento
+    private lateinit var loading: MutableState<Boolean>
 
     // per il calendario
     private var calendar = Calendar.getInstance()
@@ -72,10 +81,11 @@ class CreatePostActivity : ComponentActivity() {
     private var current_day = calendar.get(Calendar.DAY_OF_MONTH)
 
     // indici errori
-    val photoErrorIndex = 0
-    val dateErrorIndex = 1
-    val positionErrorIndex = 2
-    val descriptionErrorIndex = 3
+    val petNameErrorIndex = 0
+    val photoErrorIndex = 1
+    val dateErrorIndex = 2
+    val positionErrorIndex = 3
+    val descriptionErrorIndex = 4
 
 
 
@@ -98,14 +108,6 @@ class CreatePostActivity : ComponentActivity() {
         }
     }
 
-    /*
-    Ogni funzione annotata con "Composable" e' una componente di Jetpack Compose.
-    Non restituisce niente, semplicemente descrive che aspetto deve avere questa
-    parte dell'interfaccia.
-
-    remember = store the value just in case recompose is called
-    mutablestate = store the value and in case I update value trigger, recompose for all elements using this data
-    */
 
 
     // COMPOSABLE PRINCIPALE
@@ -113,11 +115,12 @@ class CreatePostActivity : ComponentActivity() {
     fun PageContent() {
 
         // per mostrare messaggi di errore quando i valori messi non sono validi
+        val petNameError: MutableState<Boolean> = remember { mutableStateOf(false) }
         val photoError: MutableState<Boolean> = remember { mutableStateOf(false) }
         val dateError: MutableState<Boolean> = remember { mutableStateOf(false) }
         val positionError: MutableState<Boolean> = remember { mutableStateOf(false) }
         val descriptionError: MutableState<Boolean> = remember { mutableStateOf(false) }
-        val missingFieldErrors : Array<MutableState<Boolean>> = arrayOf(photoError, dateError, positionError, descriptionError)
+        val missingFieldErrors : Array<MutableState<Boolean>> = arrayOf(petNameError, photoError, dateError, positionError, descriptionError)
 
         Column(
             Modifier
@@ -130,8 +133,42 @@ class CreatePostActivity : ComponentActivity() {
                 text = "Create a new post",
                 fontSize = 30.sp
             )
-            // Form
-            Form(missingFieldErrors)
+
+            // Per mostrare la schermata di caricamento quando invii il post
+            loading = remember { mutableStateOf(false) }
+
+            if (!loading.value) {
+                // Form
+                Form(missingFieldErrors)
+            }
+            else {
+                LoadingScreen()
+            }
+        }
+    }
+
+    @Composable
+    fun LoadingScreen() {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            //verticalArrangement = Arrangement.Center
+        ) {
+            Spacer(Modifier.fillMaxHeight(0.35f))   // spazio vuoto sopra la scritta
+
+            Text(
+                text = "Creating post...",
+                fontSize = 20.sp,
+                modifier = Modifier.padding(20.dp)
+                //textAlign = Alignment.Center
+            )
+            CircularProgressIndicator(
+                modifier = Modifier
+                    .width(64.dp),
+                //.align(Alignment.Center),
+                color = MaterialTheme.colorScheme.secondary,
+                //trackColor = MaterialTheme.colorScheme.surfaceVariant,
+            )
         }
     }
 
@@ -146,6 +183,8 @@ class CreatePostActivity : ComponentActivity() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(15.dp)
         ) {
+
+            PetNameField(missingFieldErrors[petNameErrorIndex])
 
             PhotoField(missingFieldErrors[photoErrorIndex])
 
@@ -165,19 +204,69 @@ class CreatePostActivity : ComponentActivity() {
                 // Controlla se i campi sono validi
                 if (validateFields(missingFieldErrors)) {
 
+                    // Mostra schermata di caricamento
+                    loading.value = true
+
+                    CoroutineScope(Dispatchers.IO).launch {
+                        runBlocking {
+                            val res = postsHandler.createPost(user_id, petName, pet_type, date, position, description, getPath(photoURI))
+                            Log.d("Server response", res.toString())
+                            // TODO: gestire errore server in base al valore di res
+                        }
+                        finish()
+                    }
+
+                    /*
                     // Crea nuovo post (da sostituire con una cosa non-blocking che mostra una schermata di caricamento)
                     runBlocking{
-                        val res = postsHandler.createPost(user_id, pet_type, date, position, description, getPath(photoURI))
+                        val res = postsHandler.createPost(user_id, petName, pet_type, date, position, description, getPath(photoURI))
                     }
                     // Ritorna alla pagina con tutti i post
                     //startActivity(Intent(this@CreatePostActivity, SeePostsActivity::class.java))
                     finish()
+                    */
                 }
             }) {
                 Text("Create Post")
             }
         }
     }
+
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    fun PetNameField(showPetNameError: MutableState<Boolean>) {
+        var text by remember { mutableStateOf("") }
+
+        Column {
+            Row (
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                Text(
+                    text = "Pet name: "
+                )
+                OutlinedTextField(
+                    value = text,        // il valore mostrato nel campo
+                    onValueChange = {
+                        // Prendi massimo descriptionMaxLength caratteri
+                        text = it.take(petNameMaxLength)
+                        petName = text
+                        showPetNameError.value = false     // nascondi messaggio di errore
+                    },
+                    label = { Text("Pet name") }
+                )
+            }
+            // Messaggio di errore
+            if (showPetNameError.value) {
+                Text(
+                    text = "Please add your pet's name.",
+                    fontSize = 14.sp,
+                    color = Color.Red
+                )
+            }
+        }
+    }
+
 
 
     private val READ_STORAGE_PERMISSION_REQUEST_CODE = 41
@@ -470,6 +559,9 @@ class CreatePostActivity : ComponentActivity() {
 
     fun validateFields(missingFieldErrors: Array<MutableState<Boolean>>): Boolean {
 
+        // Controlla se c'e' il nome
+        missingFieldErrors[petNameErrorIndex].value = (petName == "")
+
         // Controlla se c'e' la foto
         missingFieldErrors[photoErrorIndex].value = (photoURI == null)
 
@@ -480,7 +572,7 @@ class CreatePostActivity : ComponentActivity() {
         missingFieldErrors[positionErrorIndex].value = (position == "")
 
 
-        if (photoURI != null && date != "" && position != "") {
+        if (petName != "" && photoURI != null && date != "" && position != "") {
             if (description == "") {
                 description = " "         // perche' non so se inviare una stringa vuota al DB da' problemi
             }

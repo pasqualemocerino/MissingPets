@@ -21,9 +21,11 @@ import java.io.File
 data class Post(
     var post_id: Int,
     var user_id: Int,
+    var pet_name: String,
     var pet_type: String,
     var date: String,
     var position: String,
+    var address: String,
     var description: String,
 )
 // var str = "user_id=$user_id&pet_type=$pet_type&date=$date&position=$position&description=$description"
@@ -43,7 +45,7 @@ class PostsHandler : ViewModel() {
             // itero su tutti i post
             for (obj in json) {
                 val post = obj.asJsonArray
-                postsList.add(Post(post[0].asInt, post[1].asInt, post[2].asString, post[3].asString, post[4].asString, post[5].asString))
+                postsList.add(Post(post[0].asInt, post[1].asInt, post[2].asString, post[3].asString, post[4].asString, post[5].asString, post[6].asString, post[7].asString))
             }
         } catch (e: Exception) {
             // handle exception
@@ -54,11 +56,11 @@ class PostsHandler : ViewModel() {
     }
 
 
-    suspend fun createPost(user_id:Int, pet_type:String, date:String, position:String, description:String, photoPath:String): Int {
+    suspend fun createPost(user_id:Int, petName:String, pet_type:String, date:String, position:String, description:String, photoPath:String): Int {
         var res = -1
 
-        // Prepara post per l'invio
-        var newPost = Post(0, user_id, pet_type, date, position, description)
+        // Prepara post per l'invio (post_id e address hanno valori qualunque tanto vengono impostati bene dal server)
+        var newPost = Post(0, user_id, petName, pet_type, date, position, "", description)
         //val postToSend = RequestBody.create(MediaType.parse("application/json"), Gson().toJson(newPost))
         val postToSend = RequestBody.create("application/json".toMediaTypeOrNull(), Gson().toJson(newPost))
 
