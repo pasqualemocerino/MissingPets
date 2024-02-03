@@ -37,6 +37,7 @@ import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.app.ActivityCompat
+import com.example.missingpets.ui.theme.MissingPetsTheme
 import com.example.missingpets.ui.theme.Test_Caricamento_AnnuncioTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -91,12 +92,15 @@ class CreatePostActivity : ComponentActivity() {
 
     // Funzione chiamata quando l'activity viene creata
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        Log.d("CAMBIO ACTIVITY", "Sto creando l'activity CreatePostsActivity")
+
         super.onCreate(savedInstanceState)
 
         mapSelectorDialog = MapSelectorDialog(this)
 
         setContent {
-            Test_Caricamento_AnnuncioTheme {
+            MissingPetsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -107,6 +111,7 @@ class CreatePostActivity : ComponentActivity() {
             }
         }
     }
+
 
 
 

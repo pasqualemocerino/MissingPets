@@ -27,16 +27,13 @@ import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.*
+import java.util.ArrayList
 
-
+// E' brutto averla come variabile globale ma funziona solo cosi' :(( poi magari cerco una soluz migliore
 var postsList : MutableList<Post> = ArrayList<Post>()
-
-
 
 @Composable
 fun HomeScreen(navController: NavController) {
-
-    Log.d("CAMBIO SCREEN", "Schermata Home")
 
     //val user = auth.currentUser()
     val context = LocalContext.current
@@ -67,21 +64,13 @@ fun HomeScreen(navController: NavController) {
                         postsList = PostsHandler.getPostsList()
                     }
                     loading.value = false
+                    Log.d("DONE!", "obtained posts from server")
                 }
             }
         }
 
         // Lista dei post o schermata di caricamento, a seconda del valore di loading
         PostsListOrLoading(loading)
-
-        /*
-        // Pulsante per andare alla pagina dove creare un nuovo post
-        Button(onClick = {
-            startActivity(Intent(this@SeePostsComposable, CreatePostActivity::class.java));
-        }) {
-            Text("Create New Post")
-        }
-        */
     }
 }
 

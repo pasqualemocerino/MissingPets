@@ -61,12 +61,13 @@ class MainActivity : ComponentActivity() {
                     ) { innerPadding ->
                         NavHost(
                             navController = navController,
-                            startDestination = "home",
+                            startDestination = Routes.HOME,
                             modifier = Modifier.padding(innerPadding)
                         ) {
                             composable(Routes.HOME) { HomeScreen(navController = navController) }
-                            composable("scan") { ScanScreen(navController = navController) }
-                            composable("add") { AddScreen(navController = navController) }
+                            // queste due sotto le ho tolte perche' sono activities a parte, non routes
+                            //composable("scan") { ScanScreen(navController = navController) }
+                            //composable("add") { AddScreen(navController = navController) }
                             composable(Routes.CHATS) { ChatScreen(navController = navController) }
                             composable(Routes.PROFILE) { ProfileScreen(navController = navController) }
                         }
@@ -115,77 +116,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    //-------------------------------------ADD ANNOUNCEMENT PAGE------------------------------------
-    @Composable
-    fun AddScreen(navController: NavController) {
-        Column {
-            Logo(navController = navController, username = "Chiara")
-            val context = LocalContext.current
-            Button(onClick = {
-                context.startActivity(Intent(context, CreatePostActivity::class.java))
-                //context.startActivity(Intent(context, CreatePostActivity::class.java))
-            }) {
-                Text(text = "Add announcements")
-            }
-        }
-    }
-
-
-    //----------------------------------------CHAT PAGE---------------------------------------
-    @Composable
-    fun ChatScreen(navController: NavController) {
-        Column {
-            Logo(navController = navController, username = "Chiara")
-        }
-    }
-
-
-    //-----------------------------------------PROFILE--------------------------------------------------
-    @Composable
-    fun ProfileScreen(navController: NavController) {
-        Column {
-            Logo(navController = navController, username = "Chiara")
-            AboutYouSection(user = User("Chiara", "chiara@prova.it"))
-            //OwnPost(postsHandler = PostsHandler())
-        }
-    }
-
-    //Definition of the user whos credentials will be taken from the database
-    data class User(
-        val username: String,
-        val email: String,
-    )
-
-    //Definition of the about you section with the summary of all the info about the user
-    @Composable
-    fun AboutYouSection(user: User) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-            Text(text = "About You", fontWeight = FontWeight.Bold, fontSize = 20.sp)
-            Spacer(modifier = Modifier.height(8.dp))
-            Text("Username: ${user.username}")
-            Text("Email: ${user.email}")
-        }
-    }
-
-    /*@Composable
-    fun OwnPost(postsHandler : PostsHandler) {
-        val firstPost = remember { postsHandler.getFirstPost() }
-        var postElement: SeePostsActivity = SeePostsActivity()
-        Column {
-            if (firstPost != null) {
-                postElement.PostElement(post = firstPost)
-            } else {
-                Text(text = "You don't have announcements")
-            }
-        }
-    }*/
-
-
-
 
     //----------------------------------------LOGO--------------------------------------------------
     @Composable
@@ -220,7 +150,7 @@ class MainActivity : ComponentActivity() {
         Home(Routes.HOME, Icons.Default.Home),
         Scan("Scan", Icons.Default.Search),
         Add("Add", Icons.Default.Add),
-        Chat(Routes.CHATS, Icons.Default.Send),
+        Chats(Routes.CHATS, Icons.Default.Send),
         Profile(Routes.PROFILE, Icons.Default.Person)
     }
 
@@ -237,40 +167,23 @@ class MainActivity : ComponentActivity() {
                     onClick = {
                         when (item) {
                             BottomNavItem.Home -> {
-                                //context.startActivity(Intent(context, SeePostsActivity::class.java))
                                 navController.navigate(Routes.HOME)
                             }
 
                             BottomNavItem.Scan -> {
-                                navController.navigate(item.route) {
-                                    popUpTo(navController.graph.startDestinationId)
-                                    launchSingleTop = true
-                                }
+                                context.startActivity(Intent(context, ScanActivity::class.java ))
                             }
 
                             BottomNavItem.Add -> {
-                                Log.d("CLICK", "hai cliccato sul pulsante Add")
-                                //context.startActivity(Intent(context, CreatePostActivity::class.java ))
-                                val intent = Intent(context, CreatePostActivity::class.java)
-                                context.startActivity(intent)
+                                context.startActivity(Intent(context, CreatePostActivity::class.java ))
                                 }
 
-
-                            BottomNavItem.Chat -> {
-                                navController.navigate(item.route) {
-                                    popUpTo(navController.graph.startDestinationId)
-                                    launchSingleTop = true
-                                }
+                            BottomNavItem.Chats -> {
+                                navController.navigate(Routes.CHATS)
                             }
 
                             BottomNavItem.Profile -> {
                                 navController.navigate(Routes.PROFILE)
-                                /*
-                                navController.navigate(item.route) {
-                                    popUpTo(navController.graph.startDestinationId)
-                                    launchSingleTop = true
-                                }
-                                */
                             }
                         }
                     },

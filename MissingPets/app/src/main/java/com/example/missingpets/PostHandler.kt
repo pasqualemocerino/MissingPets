@@ -15,6 +15,9 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.*
 import java.io.File
+import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
+import java.util.Date
 
 
 //import com.example.laboratory1.Model.DataModel
@@ -36,21 +39,44 @@ object PostsHandler : ViewModel() {            // 'object' e' un Singleton
     private lateinit var postsList: ArrayList<Post>
     private var retrofit = ServerAPI.HelperClass.getInstance()
 
-    /*
-    // Per ottenere l'unica istanza di PostsHandler
-    fun getInstance(): PostsHandler {
-        return
-    }
-    */
+    // Salvati la data dell'ultima volta che hai preso i post dal server.
+    // Cosi' se li hai presi troppo tempo fa, ri-prendili
+    private lateinit var lastServerRequestDate : LocalDateTime
+
+    // Ogni quanti minuti aggiornare la lista dei post
+    private val minutesBetweenUpdates = 5
+
 
     suspend fun getPostsList(): ArrayList<Post> {
-        if (this::postsList.isInitialized) {
-            return postsList
+        if (this::postsList.isInitialized && this::lastServerRequestDate.isInitialized) {
+
+            // Calcolati quanti minuti sono passati dall'ultima volta che hai preso i post dal server
+            val minutes = lastServerRequestDate.until( LocalDateTime.now(), ChronoUnit.MINUTES )
+
+            // Se sono passati piu' di minutesBetweenUpdates minuti, riprendi i dati dal server
+            if (minutes >= minutesBetweenUpdates) {
+                return getPostsListFromServer()
+            }
+            // Altrimenti restituisci la lista che gia' ti eri trovato prima
+            else {
+                return postsList
+            }
         }
-        else return getPostsListFromServer()
+        else {
+            return getPostsListFromServer()
+        }
     }
 
+
     suspend fun getPostsListFromServer(): ArrayList<Post> {
+
+        Log.d("POST", "requesting data from server")
+
+        // Salvati la data attuale dentro lastServerRequestDate, per segnare
+        // quand'e' l'ultima volta che hai preso i dati dal server
+        lastServerRequestDate = LocalDateTime.now()
+
+        // Inizializza (o svuota) la lista
         postsList = ArrayList<Post>()
 
         try {
@@ -74,15 +100,13 @@ object PostsHandler : ViewModel() {            // 'object' e' un Singleton
         var res = -1
 
         // Prepara post per l'invio (post_id e address hanno valori qualunque tanto vengono impostati bene dal server)
-        var newPost = Post(0, user_id, petName, pet_type, date, position, "", description)
-        //val postToSend = RequestBody.create(MediaType.parse("application/json"), Gson().toJson(newPost))
+        val newPost = Post(0, user_id, petName, pet_type, date, position, "", description)
         val postToSend = RequestBody.create("application/json".toMediaTypeOrNull(), Gson().toJson(newPost))
 
         // Prepara foto per l'invio
         val file = File(photoPath)
         val requestFile = RequestBody.create(MultipartBody.FORM, file)
         val photoToSend = MultipartBody.Part.createFormData("photo", file.name, requestFile)
-
 
         try {
             // send POST request

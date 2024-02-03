@@ -37,13 +37,11 @@
         <activity android:name=".CameraActivity">
         </activity>
 
-        <activity android:name=".SeePostsActivity">
-        </activity>
-
         <activity android:name=".CreatePostActivity">
         </activity>
 
-
+        <activity android:name=".ScanActivity">
+        </activity>
 
 
     </application>

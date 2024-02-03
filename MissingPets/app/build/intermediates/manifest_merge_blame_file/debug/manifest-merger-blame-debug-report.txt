@@ -100,7 +100,7 @@
 55-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\Anna\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:25:9-33
 56
 57    <application
-57-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:16:5-49:19
+57-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:16:5-47:19
 58        android:allowBackup="true"
 58-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:17:9-35
 59        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -147,13 +147,13 @@
 81-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:37:9-38:20
 81-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:37:19-49
 82        </activity>
-83        <activity android:name="com.example.missingpets.SeePostsActivity" >
+83        <activity android:name="com.example.missingpets.CreatePostActivity" >
 83-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:40:9-41:20
-83-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:40:19-51
+83-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:40:19-53
 84        </activity>
-85        <activity android:name="com.example.missingpets.CreatePostActivity" >
+85        <activity android:name="com.example.missingpets.ScanActivity" >
 85-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:43:9-44:20
-85-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:43:19-53
+85-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:43:19-47
 86        </activity>
 87
 88        <service
