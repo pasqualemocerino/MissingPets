@@ -369,6 +369,9 @@ class CreatePostActivity : ComponentActivity() {
                         showDateError.value = false                   // nascondi messaggio di errore
                     }, current_year, current_month, current_day
                 )
+                // Disabilita date future (se sai gia' che perderai il cane tra una settimana
+                // chiamiamo la protezione animali)
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                 Button(onClick = {
                     datePickerDialog.show()
                 }) {
@@ -500,7 +503,7 @@ class CreatePostActivity : ComponentActivity() {
                                 mapSelectorDialog.startLocation = mapSelectorDialog.getPosition().clone()
 
                                 position = mapSelectorDialog.getPositionAsString()
-                                Log.d("pos", position)
+                                //Log.d("pos", position)
                                 text = "selected"   // se no la vera posizione viene troppo lunga
 
                                 showPositionError.value = false     // nascondi messaggio di errore

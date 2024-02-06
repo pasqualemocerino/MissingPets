@@ -13,6 +13,9 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:remove="android:maxSdkVersion" tools:node="replace"/>
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" tools:remove="android:maxSdkVersion" tools:node="replace"/>
 
+    <uses-feature android:name="android.hardware.sensor.accelerometer" />
+    <uses-feature android:name="android.hardware.sensor.compass" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -43,6 +46,8 @@
         <activity android:name=".ScanActivity">
         </activity>
 
+        <activity android:name=".NavigationActivity">
+        </activity>
 
     </application>
 

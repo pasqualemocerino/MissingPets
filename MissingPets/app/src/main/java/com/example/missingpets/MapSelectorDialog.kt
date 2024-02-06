@@ -27,6 +27,7 @@ import org.osmdroid.views.overlay.MapEventsOverlay
 import org.osmdroid.views.overlay.Marker
 import rememberMapViewWithLifecycle
 import java.io.File
+import java.util.Locale
 
 
 // Source:
@@ -261,8 +262,12 @@ class MapSelectorDialog {
     }
 
     fun getPositionAsString(): String {
-        //return "(" + startPoint.latitude.toString() + ", " + startPoint.longitude.toString() + ")"
-        return startPoint.latitude.toString() + "," + startPoint.longitude.toString()
+        // Tagliamo le coordinate a 8 cifre decimali per evitare problemi nel server
+        var lat = "%.8f".format(Locale.ENGLISH, startPoint.latitude)
+        var lon = "%.8f".format(Locale.ENGLISH, startPoint.longitude)
+        val str = lat + "," + lon
+        //Log.d("coordinate", str)
+        return str
     }
 }
 
@@ -278,7 +283,7 @@ class MyMapEventsReceiver : MapEventsReceiver {
         this.callback = callback
     }
     override fun singleTapConfirmedHelper(p: GeoPoint): Boolean {
-        Log.d("posizione", p.toString())
+        //Log.d("posizione", p.toString())
         callback(p)
         return true
     }

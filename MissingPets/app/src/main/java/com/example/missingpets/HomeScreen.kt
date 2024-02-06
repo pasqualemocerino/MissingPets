@@ -1,5 +1,6 @@
 package com.example.missingpets
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.util.Log
 import androidx.compose.foundation.BorderStroke
@@ -171,7 +172,32 @@ fun PostElement(post: Post) {
             Text(
                 text = "User: " + post.user_id
             )
+            NavigationButton(post.position, post.address)
         }
+    }
+
+}
+
+@Composable
+fun NavigationButton(position:String, address:String) {
+    val context = LocalContext.current
+
+    // Prendi coordinate dalla posizione
+    val coords = position.split(",")
+    val lat = coords[0].trim().toDouble()
+    val lon = coords[1].trim().toDouble()
+
+    val intent = Intent(context, NavigationActivity::class.java)
+    intent.putExtra("latitude", lat)     // latitudine della destinazione
+    intent.putExtra("longitude", lon)    // longitudine della destinazione
+    intent.putExtra("address", address)  // indirizzo destinazione, per farlo stampare
+
+    Button(
+        onClick = {
+            context.startActivity(intent)
+        }
+    ){
+        Text("Navigate")
     }
 
 }

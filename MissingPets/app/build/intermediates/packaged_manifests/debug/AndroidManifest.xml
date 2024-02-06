@@ -20,6 +20,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
+    <uses-feature android:name="android.hardware.sensor.accelerometer" />
+    <uses-feature android:name="android.hardware.sensor.compass" />
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
@@ -83,6 +85,8 @@
         <activity android:name="com.example.missingpets.CreatePostActivity" >
         </activity>
         <activity android:name="com.example.missingpets.ScanActivity" >
+        </activity>
+        <activity android:name="com.example.missingpets.NavigationActivity" >
         </activity>
 
         <service

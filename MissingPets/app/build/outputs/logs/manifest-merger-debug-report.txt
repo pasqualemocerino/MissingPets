@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:2:1-50:12
-INJECTED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:2:1-50:12
-INJECTED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:2:1-50:12
-INJECTED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:2:1-50:12
+ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:2:1-55:12
+INJECTED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:2:1-55:12
+INJECTED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:2:1-55:12
+INJECTED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:2:1-55:12
 MERGED from [io.coil-kt:coil-compose:2.0.0-rc01] C:\Users\Anna\.gradle\caches\transforms-3\3178bf8f2a70b3687278ab4e094f3f93\transformed\coil-compose-2.0.0-rc01\AndroidManifest.xml:2:1-9:12
 MERGED from [io.coil-kt:coil-compose-base:2.0.0-rc01] C:\Users\Anna\.gradle\caches\transforms-3\8d22730d10e4f6b426293b967a2f9653\transformed\coil-compose-base-2.0.0-rc01\AndroidManifest.xml:2:1-9:12
 MERGED from [io.coil-kt:coil:2.0.0-rc01] C:\Users\Anna\.gradle\caches\transforms-3\c853341c96042a93d08c7d3f13d178fa\transformed\coil-2.0.0-rc01\AndroidManifest.xml:2:1-9:12
@@ -170,9 +170,17 @@ ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\A
 		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:14:74-110
 	android:name
 		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:14:22-73
+uses-feature#android.hardware.sensor.accelerometer
+ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:16:5-74
+	android:name
+		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:16:19-71
+uses-feature#android.hardware.sensor.compass
+ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:17:5-68
+	android:name
+		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:17:19-65
 application
-ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:16:5-47:19
-INJECTED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:16:5-47:19
+ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:19:5-52:19
+INJECTED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:19:5-52:19
 MERGED from [androidx.camera:camera-camera2:1.3.1] C:\Users\Anna\.gradle\caches\transforms-3\46cffb88752f07ce92e4954064f91dd7\transformed\camera-camera2-1.3.1\AndroidManifest.xml:23:5-34:19
 MERGED from [androidx.camera:camera-camera2:1.3.1] C:\Users\Anna\.gradle\caches\transforms-3\46cffb88752f07ce92e4954064f91dd7\transformed\camera-camera2-1.3.1\AndroidManifest.xml:23:5-34:19
 MERGED from [androidx.camera:camera-core:1.3.1] C:\Users\Anna\.gradle\caches\transforms-3\8efd55b408a0a9d3e5cdf55435c99176\transformed\camera-core-1.3.1\AndroidManifest.xml:23:5-34:19
@@ -218,55 +226,59 @@ MERGED from [com.google.android.play:core-common:2.0.2] C:\Users\Anna\.gradle\ca
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.10.0] C:\Users\Anna\.gradle\caches\transforms-3\c8d3dbbcc37b7255cac4e72d4b5de44b\transformed\core-1.10.0\AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:23:9-35
+		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:26:9-35
 	android:label
-		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:21:9-41
+		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:24:9-41
 	android:fullBackupContent
-		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:19:9-54
-	android:roundIcon
 		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:22:9-54
+	android:roundIcon
+		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:25:9-54
 	tools:targetApi
-		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:25:9-29
+		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:28:9-29
 	android:icon
-		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:20:9-43
+		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:23:9-43
 	android:allowBackup
-		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:17:9-35
+		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:20:9-35
 	android:theme
-		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:24:9-49
+		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:27:9-49
 	android:dataExtractionRules
-		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:18:9-65
+		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:21:9-65
 activity#com.example.missingpets.MainActivity
-ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:26:9-35:20
+ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:29:9-38:20
 	android:label
-		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:29:13-45
+		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:32:13-45
 	android:exported
-		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:28:13-36
+		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:31:13-36
 	android:theme
-		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:30:13-53
+		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:33:13-53
 	android:name
-		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:27:13-41
+		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:30:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:31:13-34:29
+ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:34:13-37:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:32:17-69
+ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:35:17-69
 	android:name
-		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:32:25-66
+		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:35:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:33:17-77
+ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:36:17-77
 	android:name
-		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:33:27-74
+		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:36:27-74
 activity#com.example.missingpets.CameraActivity
-ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:37:9-38:20
-	android:name
-		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:37:19-49
-activity#com.example.missingpets.CreatePostActivity
 ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:40:9-41:20
 	android:name
-		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:40:19-53
-activity#com.example.missingpets.ScanActivity
+		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:40:19-49
+activity#com.example.missingpets.CreatePostActivity
 ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:43:9-44:20
 	android:name
-		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:43:19-47
+		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:43:19-53
+activity#com.example.missingpets.ScanActivity
+ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:46:9-47:20
+	android:name
+		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:46:19-47
+activity#com.example.missingpets.NavigationActivity
+ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:49:9-50:20
+	android:name
+		ADDED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:49:19-53
 uses-sdk
 INJECTED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml
