@@ -78,11 +78,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.missingpets.CameraActivity" >
-        </activity>
         <activity android:name="com.example.missingpets.CreatePostActivity" >
         </activity>
-        <activity android:name="com.example.missingpets.ScanActivity" >
+        <activity
+            android:name="com.example.missingpets.ScanActivity"
+            android:label="MissingPets"
+            android:theme="@style/AppTheme" >
         </activity>
 
         <service

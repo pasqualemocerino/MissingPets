@@ -8,5 +8,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="white">#FFFFFFFF</color>
     <string name="app_name">MissingPets</string>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    </style>
     <style name="Theme.MissingPets" parent="android:Theme.Material.Light.NoActionBar"/>
 </resources>

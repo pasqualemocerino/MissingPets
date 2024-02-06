@@ -9,293 +9,294 @@
 9        android:targetSdkVersion="33" />
 10
 11    <uses-permission android:name="android.permission.CAMERA" />
-11-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:5:5-64
-11-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:5:22-62
+11-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:5:5-64
+11-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:5:22-62
 12
 13    <uses-feature android:name="android.hardware.camera.any" />
-13-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:6:5-63
-13-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:6:19-61
+13-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:6:5-63
+13-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:6:19-61
 14
 15    <uses-permission android:name="android.permission.INTERNET" />
-15-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:8:5-67
-15-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:8:22-64
+15-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:8:5-67
+15-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:8:22-64
 16    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-16-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:9:5-81
-16-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:9:22-78
+16-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:9:5-81
+16-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:9:22-78
 17    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-17-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:10:5-78
-17-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:10:22-76
+17-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:10:5-78
+17-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:10:22-76
 18    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-18-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:11:5-80
-18-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:11:22-76
+18-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:11:5-80
+18-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:11:22-76
 19    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-19-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:12:5-137
-19-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:12:22-77
+19-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:12:5-137
+19-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:12:22-77
 20    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-20-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:13:5-138
-20-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:13:22-78
+20-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:13:5-138
+20-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:13:22-78
 21    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-21-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:14:5-133
-21-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:14:22-73
+21-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:14:5-133
+21-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:14:22-73
 22
 23    <uses-feature
-23-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\Anna\.gradle\caches\transforms-3\a11068ebd4ad6ad790462fc64f644bb3\transformed\play-services-maps-18.2.0\AndroidManifest.xml:26:5-28:35
+23-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\chiar\.gradle\caches\transforms-3\a11068ebd4ad6ad790462fc64f644bb3\transformed\play-services-maps-18.2.0\AndroidManifest.xml:26:5-28:35
 24        android:glEsVersion="0x00020000"
-24-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\Anna\.gradle\caches\transforms-3\a11068ebd4ad6ad790462fc64f644bb3\transformed\play-services-maps-18.2.0\AndroidManifest.xml:27:9-41
+24-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\chiar\.gradle\caches\transforms-3\a11068ebd4ad6ad790462fc64f644bb3\transformed\play-services-maps-18.2.0\AndroidManifest.xml:27:9-41
 25        android:required="true" />
-25-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\Anna\.gradle\caches\transforms-3\a11068ebd4ad6ad790462fc64f644bb3\transformed\play-services-maps-18.2.0\AndroidManifest.xml:28:9-32
+25-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\chiar\.gradle\caches\transforms-3\a11068ebd4ad6ad790462fc64f644bb3\transformed\play-services-maps-18.2.0\AndroidManifest.xml:28:9-32
 26
 27    <queries>
-27-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\Anna\.gradle\caches\transforms-3\a11068ebd4ad6ad790462fc64f644bb3\transformed\play-services-maps-18.2.0\AndroidManifest.xml:30:5-34:15
+27-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\chiar\.gradle\caches\transforms-3\a11068ebd4ad6ad790462fc64f644bb3\transformed\play-services-maps-18.2.0\AndroidManifest.xml:30:5-34:15
 28
 29        <!-- Needs to be explicitly declared on Android R+ -->
 30        <package android:name="com.google.android.apps.maps" />
-30-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\Anna\.gradle\caches\transforms-3\a11068ebd4ad6ad790462fc64f644bb3\transformed\play-services-maps-18.2.0\AndroidManifest.xml:33:9-64
-30-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\Anna\.gradle\caches\transforms-3\a11068ebd4ad6ad790462fc64f644bb3\transformed\play-services-maps-18.2.0\AndroidManifest.xml:33:18-61
+30-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\chiar\.gradle\caches\transforms-3\a11068ebd4ad6ad790462fc64f644bb3\transformed\play-services-maps-18.2.0\AndroidManifest.xml:33:9-64
+30-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\chiar\.gradle\caches\transforms-3\a11068ebd4ad6ad790462fc64f644bb3\transformed\play-services-maps-18.2.0\AndroidManifest.xml:33:18-61
 31    </queries>
 32
 33    <permission
-33-->[androidx.core:core:1.10.0] C:\Users\Anna\.gradle\caches\transforms-3\c8d3dbbcc37b7255cac4e72d4b5de44b\transformed\core-1.10.0\AndroidManifest.xml:22:5-24:47
+33-->[androidx.core:core:1.10.0] C:\Users\chiar\.gradle\caches\transforms-3\c8d3dbbcc37b7255cac4e72d4b5de44b\transformed\core-1.10.0\AndroidManifest.xml:22:5-24:47
 34        android:name="com.example.missingpets.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-34-->[androidx.core:core:1.10.0] C:\Users\Anna\.gradle\caches\transforms-3\c8d3dbbcc37b7255cac4e72d4b5de44b\transformed\core-1.10.0\AndroidManifest.xml:23:9-81
+34-->[androidx.core:core:1.10.0] C:\Users\chiar\.gradle\caches\transforms-3\c8d3dbbcc37b7255cac4e72d4b5de44b\transformed\core-1.10.0\AndroidManifest.xml:23:9-81
 35        android:protectionLevel="signature" />
-35-->[androidx.core:core:1.10.0] C:\Users\Anna\.gradle\caches\transforms-3\c8d3dbbcc37b7255cac4e72d4b5de44b\transformed\core-1.10.0\AndroidManifest.xml:24:9-44
+35-->[androidx.core:core:1.10.0] C:\Users\chiar\.gradle\caches\transforms-3\c8d3dbbcc37b7255cac4e72d4b5de44b\transformed\core-1.10.0\AndroidManifest.xml:24:9-44
 36
 37    <uses-permission android:name="com.example.missingpets.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-37-->[androidx.core:core:1.10.0] C:\Users\Anna\.gradle\caches\transforms-3\c8d3dbbcc37b7255cac4e72d4b5de44b\transformed\core-1.10.0\AndroidManifest.xml:26:5-97
-37-->[androidx.core:core:1.10.0] C:\Users\Anna\.gradle\caches\transforms-3\c8d3dbbcc37b7255cac4e72d4b5de44b\transformed\core-1.10.0\AndroidManifest.xml:26:22-94
+37-->[androidx.core:core:1.10.0] C:\Users\chiar\.gradle\caches\transforms-3\c8d3dbbcc37b7255cac4e72d4b5de44b\transformed\core-1.10.0\AndroidManifest.xml:26:5-97
+37-->[androidx.core:core:1.10.0] C:\Users\chiar\.gradle\caches\transforms-3\c8d3dbbcc37b7255cac4e72d4b5de44b\transformed\core-1.10.0\AndroidManifest.xml:26:22-94
 38
 39    <supports-screens
-39-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\Anna\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:9:5-12:40
+39-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\chiar\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:9:5-12:40
 40        android:anyDensity="true"
-40-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\Anna\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:10:9-34
+40-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\chiar\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:10:9-34
 41        android:largeScreens="true"
-41-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\Anna\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:11:9-36
+41-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\chiar\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:11:9-36
 42        android:normalScreens="true" />
-42-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\Anna\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:12:9-37
+42-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\chiar\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:12:9-37
 43
 44    <uses-feature
-44-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\Anna\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:14:5-16:36
+44-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\chiar\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:14:5-16:36
 45        android:name="android.hardware.location.network"
-45-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\Anna\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:15:9-57
+45-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\chiar\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:15:9-57
 46        android:required="false" />
-46-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\Anna\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:16:9-33
+46-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\chiar\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:16:9-33
 47    <uses-feature
-47-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\Anna\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:17:5-19:36
+47-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\chiar\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:17:5-19:36
 48        android:name="android.hardware.location.gps"
-48-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\Anna\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:18:9-53
+48-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\chiar\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:18:9-53
 49        android:required="false" />
-49-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\Anna\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:19:9-33
+49-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\chiar\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:19:9-33
 50    <uses-feature
-50-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\Anna\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:20:5-22:36
+50-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\chiar\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:20:5-22:36
 51        android:name="android.hardware.telephony"
-51-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\Anna\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:21:9-50
+51-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\chiar\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:21:9-50
 52        android:required="false" />
-52-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\Anna\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:22:9-33
+52-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\chiar\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:22:9-33
 53    <uses-feature
-53-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\Anna\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:23:5-25:36
+53-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\chiar\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:23:5-25:36
 54        android:name="android.hardware.wifi"
-54-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\Anna\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:24:9-45
+54-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\chiar\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:24:9-45
 55        android:required="false" />
-55-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\Anna\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:25:9-33
+55-->[org.osmdroid:osmdroid-android:6.1.18] C:\Users\chiar\.gradle\caches\transforms-3\4d123ace832046a86157dad01a8e6434\transformed\osmdroid-android-6.1.18\AndroidManifest.xml:25:9-33
 56
 57    <application
-57-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:16:5-47:19
+57-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:16:5-46:19
 58        android:allowBackup="true"
-58-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:17:9-35
+58-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:17:9-35
 59        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-59-->[androidx.core:core:1.10.0] C:\Users\Anna\.gradle\caches\transforms-3\c8d3dbbcc37b7255cac4e72d4b5de44b\transformed\core-1.10.0\AndroidManifest.xml:28:18-86
+59-->[androidx.core:core:1.10.0] C:\Users\chiar\.gradle\caches\transforms-3\c8d3dbbcc37b7255cac4e72d4b5de44b\transformed\core-1.10.0\AndroidManifest.xml:28:18-86
 60        android:dataExtractionRules="@xml/data_extraction_rules"
-60-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:18:9-65
+60-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:18:9-65
 61        android:debuggable="true"
 62        android:extractNativeLibs="false"
 63        android:fullBackupContent="@xml/backup_rules"
-63-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:19:9-54
+63-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:19:9-54
 64        android:icon="@mipmap/ic_launcher"
-64-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:20:9-43
+64-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:20:9-43
 65        android:label="@string/app_name"
-65-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:21:9-41
+65-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:21:9-41
 66        android:roundIcon="@mipmap/ic_launcher_round"
-66-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:22:9-54
+66-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:22:9-54
 67        android:supportsRtl="true"
-67-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:23:9-35
+67-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:23:9-35
 68        android:testOnly="true"
 69        android:theme="@style/Theme.MissingPets" >
-69-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:24:9-49
+69-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:24:9-49
 70        <activity
-70-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:26:9-35:20
+70-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:26:9-35:20
 71            android:name="com.example.missingpets.MainActivity"
-71-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:27:13-41
+71-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:27:13-41
 72            android:exported="true"
-72-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:28:13-36
+72-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:28:13-36
 73            android:label="@string/app_name"
-73-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:29:13-45
+73-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:29:13-45
 74            android:theme="@style/Theme.MissingPets" >
-74-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:30:13-53
+74-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:30:13-53
 75            <intent-filter>
-75-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:31:13-34:29
+75-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:31:13-34:29
 76                <action android:name="android.intent.action.MAIN" />
-76-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:32:17-69
-76-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:32:25-66
+76-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:32:17-69
+76-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:32:25-66
 77
 78                <category android:name="android.intent.category.LAUNCHER" />
-78-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:33:17-77
-78-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:33:27-74
+78-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:33:17-77
+78-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:33:27-74
 79            </intent-filter>
 80        </activity>
-81        <activity android:name="com.example.missingpets.CameraActivity" >
-81-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:37:9-38:20
-81-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:37:19-49
+81        <activity android:name="com.example.missingpets.CreatePostActivity" >
+81-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:37:9-38:20
+81-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:37:19-53
 82        </activity>
-83        <activity android:name="com.example.missingpets.CreatePostActivity" >
-83-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:40:9-41:20
-83-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:40:19-53
-84        </activity>
-85        <activity android:name="com.example.missingpets.ScanActivity" >
-85-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:43:9-44:20
-85-->C:\Users\Anna\Documents\GitHub\MissingPets\MissingPets\app\src\main\AndroidManifest.xml:43:19-47
-86        </activity>
-87
-88        <service
-88-->[androidx.camera:camera-camera2:1.3.1] C:\Users\Anna\.gradle\caches\transforms-3\46cffb88752f07ce92e4954064f91dd7\transformed\camera-camera2-1.3.1\AndroidManifest.xml:24:9-33:19
-89            android:name="androidx.camera.core.impl.MetadataHolderService"
-89-->[androidx.camera:camera-camera2:1.3.1] C:\Users\Anna\.gradle\caches\transforms-3\46cffb88752f07ce92e4954064f91dd7\transformed\camera-camera2-1.3.1\AndroidManifest.xml:25:13-75
-90            android:enabled="false"
-90-->[androidx.camera:camera-camera2:1.3.1] C:\Users\Anna\.gradle\caches\transforms-3\46cffb88752f07ce92e4954064f91dd7\transformed\camera-camera2-1.3.1\AndroidManifest.xml:26:13-36
-91            android:exported="false" >
-91-->[androidx.camera:camera-camera2:1.3.1] C:\Users\Anna\.gradle\caches\transforms-3\46cffb88752f07ce92e4954064f91dd7\transformed\camera-camera2-1.3.1\AndroidManifest.xml:27:13-37
-92            <meta-data
-92-->[androidx.camera:camera-camera2:1.3.1] C:\Users\Anna\.gradle\caches\transforms-3\46cffb88752f07ce92e4954064f91dd7\transformed\camera-camera2-1.3.1\AndroidManifest.xml:30:13-32:89
-93                android:name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER"
-93-->[androidx.camera:camera-camera2:1.3.1] C:\Users\Anna\.gradle\caches\transforms-3\46cffb88752f07ce92e4954064f91dd7\transformed\camera-camera2-1.3.1\AndroidManifest.xml:31:17-103
-94                android:value="androidx.camera.camera2.Camera2Config$DefaultProvider" />
-94-->[androidx.camera:camera-camera2:1.3.1] C:\Users\Anna\.gradle\caches\transforms-3\46cffb88752f07ce92e4954064f91dd7\transformed\camera-camera2-1.3.1\AndroidManifest.xml:32:17-86
-95        </service> <!-- Needs to be explicitly declared on P+ -->
-96        <uses-library
-96-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\Anna\.gradle\caches\transforms-3\a11068ebd4ad6ad790462fc64f644bb3\transformed\play-services-maps-18.2.0\AndroidManifest.xml:39:9-41:40
-97            android:name="org.apache.http.legacy"
-97-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\Anna\.gradle\caches\transforms-3\a11068ebd4ad6ad790462fc64f644bb3\transformed\play-services-maps-18.2.0\AndroidManifest.xml:40:13-50
-98            android:required="false" />
-98-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\Anna\.gradle\caches\transforms-3\a11068ebd4ad6ad790462fc64f644bb3\transformed\play-services-maps-18.2.0\AndroidManifest.xml:41:13-37
-99
-100        <activity
-100-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Anna\.gradle\caches\transforms-3\ba8a0efc44ed572ec1147975e9bd7466\transformed\play-services-base-18.1.0\AndroidManifest.xml:20:9-22:45
-101            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-101-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Anna\.gradle\caches\transforms-3\ba8a0efc44ed572ec1147975e9bd7466\transformed\play-services-base-18.1.0\AndroidManifest.xml:20:19-85
-102            android:exported="false"
-102-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Anna\.gradle\caches\transforms-3\ba8a0efc44ed572ec1147975e9bd7466\transformed\play-services-base-18.1.0\AndroidManifest.xml:22:19-43
-103            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-103-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Anna\.gradle\caches\transforms-3\ba8a0efc44ed572ec1147975e9bd7466\transformed\play-services-base-18.1.0\AndroidManifest.xml:21:19-78
-104
-105        <meta-data
-105-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Anna\.gradle\caches\transforms-3\11ac194e9c6d5838d05962901ca101e5\transformed\play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
-106            android:name="com.google.android.gms.version"
-106-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Anna\.gradle\caches\transforms-3\11ac194e9c6d5838d05962901ca101e5\transformed\play-services-basement-18.1.0\AndroidManifest.xml:22:13-58
-107            android:value="@integer/google_play_services_version" />
-107-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Anna\.gradle\caches\transforms-3\11ac194e9c6d5838d05962901ca101e5\transformed\play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
-108
-109        <activity
-109-->[androidx.compose.ui:ui-test-manifest:1.5.1] C:\Users\Anna\.gradle\caches\transforms-3\eada017dea41128ad335cfbd3fc92946\transformed\ui-test-manifest-1.5.1\AndroidManifest.xml:23:9-25:39
-110            android:name="androidx.activity.ComponentActivity"
-110-->[androidx.compose.ui:ui-test-manifest:1.5.1] C:\Users\Anna\.gradle\caches\transforms-3\eada017dea41128ad335cfbd3fc92946\transformed\ui-test-manifest-1.5.1\AndroidManifest.xml:24:13-63
-111            android:exported="true" />
-111-->[androidx.compose.ui:ui-test-manifest:1.5.1] C:\Users\Anna\.gradle\caches\transforms-3\eada017dea41128ad335cfbd3fc92946\transformed\ui-test-manifest-1.5.1\AndroidManifest.xml:25:13-36
-112
-113        <provider
-113-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Anna\.gradle\caches\transforms-3\c14e31871ebf0cfbe8205058ee24981f\transformed\emoji2-1.4.0\AndroidManifest.xml:24:9-32:20
-114            android:name="androidx.startup.InitializationProvider"
-114-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Anna\.gradle\caches\transforms-3\c14e31871ebf0cfbe8205058ee24981f\transformed\emoji2-1.4.0\AndroidManifest.xml:25:13-67
-115            android:authorities="com.example.missingpets.androidx-startup"
-115-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Anna\.gradle\caches\transforms-3\c14e31871ebf0cfbe8205058ee24981f\transformed\emoji2-1.4.0\AndroidManifest.xml:26:13-68
-116            android:exported="false" >
-116-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Anna\.gradle\caches\transforms-3\c14e31871ebf0cfbe8205058ee24981f\transformed\emoji2-1.4.0\AndroidManifest.xml:27:13-37
-117            <meta-data
-117-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Anna\.gradle\caches\transforms-3\c14e31871ebf0cfbe8205058ee24981f\transformed\emoji2-1.4.0\AndroidManifest.xml:29:13-31:52
-118                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-118-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Anna\.gradle\caches\transforms-3\c14e31871ebf0cfbe8205058ee24981f\transformed\emoji2-1.4.0\AndroidManifest.xml:30:17-75
-119                android:value="androidx.startup" />
-119-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Anna\.gradle\caches\transforms-3\c14e31871ebf0cfbe8205058ee24981f\transformed\emoji2-1.4.0\AndroidManifest.xml:31:17-49
-120            <meta-data
-120-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\Anna\.gradle\caches\transforms-3\306cbcd7c88151e458bf6b3a8b1ecb8a\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:29:13-31:52
-121                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-121-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\Anna\.gradle\caches\transforms-3\306cbcd7c88151e458bf6b3a8b1ecb8a\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:30:17-78
-122                android:value="androidx.startup" />
-122-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\Anna\.gradle\caches\transforms-3\306cbcd7c88151e458bf6b3a8b1ecb8a\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:31:17-49
-123            <meta-data
-123-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Anna\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
-124                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-124-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Anna\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
-125                android:value="androidx.startup" />
-125-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Anna\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
-126        </provider>
-127
-128        <activity
-128-->[androidx.compose.ui:ui-tooling-android:1.5.1] C:\Users\Anna\.gradle\caches\transforms-3\b5564c6f1789b095f7d8b5a7f019dbae\transformed\ui-tooling-release\AndroidManifest.xml:23:9-25:39
-129            android:name="androidx.compose.ui.tooling.PreviewActivity"
-129-->[androidx.compose.ui:ui-tooling-android:1.5.1] C:\Users\Anna\.gradle\caches\transforms-3\b5564c6f1789b095f7d8b5a7f019dbae\transformed\ui-tooling-release\AndroidManifest.xml:24:13-71
-130            android:exported="true" />
-130-->[androidx.compose.ui:ui-tooling-android:1.5.1] C:\Users\Anna\.gradle\caches\transforms-3\b5564c6f1789b095f7d8b5a7f019dbae\transformed\ui-tooling-release\AndroidManifest.xml:25:13-36
-131
-132        <uses-library
-132-->[androidx.window:window:1.0.0] C:\Users\Anna\.gradle\caches\transforms-3\dd234376387c9ee643b64286eeaf4450\transformed\window-1.0.0\AndroidManifest.xml:25:9-27:40
-133            android:name="androidx.window.extensions"
-133-->[androidx.window:window:1.0.0] C:\Users\Anna\.gradle\caches\transforms-3\dd234376387c9ee643b64286eeaf4450\transformed\window-1.0.0\AndroidManifest.xml:26:13-54
-134            android:required="false" />
-134-->[androidx.window:window:1.0.0] C:\Users\Anna\.gradle\caches\transforms-3\dd234376387c9ee643b64286eeaf4450\transformed\window-1.0.0\AndroidManifest.xml:27:13-37
-135        <uses-library
-135-->[androidx.window:window:1.0.0] C:\Users\Anna\.gradle\caches\transforms-3\dd234376387c9ee643b64286eeaf4450\transformed\window-1.0.0\AndroidManifest.xml:28:9-30:40
-136            android:name="androidx.window.sidecar"
-136-->[androidx.window:window:1.0.0] C:\Users\Anna\.gradle\caches\transforms-3\dd234376387c9ee643b64286eeaf4450\transformed\window-1.0.0\AndroidManifest.xml:29:13-51
-137            android:required="false" />
-137-->[androidx.window:window:1.0.0] C:\Users\Anna\.gradle\caches\transforms-3\dd234376387c9ee643b64286eeaf4450\transformed\window-1.0.0\AndroidManifest.xml:30:13-37
-138
-139        <receiver
-139-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Anna\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
-140            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-140-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Anna\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
-141            android:directBootAware="false"
-141-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Anna\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
-142            android:enabled="true"
-142-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Anna\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
-143            android:exported="true"
-143-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Anna\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
-144            android:permission="android.permission.DUMP" >
-144-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Anna\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
-145            <intent-filter>
-145-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Anna\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
-146                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-146-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Anna\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
-146-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Anna\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
-147            </intent-filter>
-148            <intent-filter>
-148-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Anna\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
-149                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-149-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Anna\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
-149-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Anna\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
-150            </intent-filter>
-151            <intent-filter>
-151-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Anna\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
-152                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-152-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Anna\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
-152-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Anna\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
-153            </intent-filter>
-154            <intent-filter>
-154-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Anna\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
-155                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-155-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Anna\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
-155-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Anna\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
-156            </intent-filter>
-157        </receiver> <!-- The activities will be merged into the manifest of the hosting app. -->
-158        <activity
-158-->[com.google.android.play:core-common:2.0.2] C:\Users\Anna\.gradle\caches\transforms-3\ee74d37f318b4ad7d4c9d4ea898856d8\transformed\core-common-2.0.2\AndroidManifest.xml:14:9-18:65
-159            android:name="com.google.android.play.core.common.PlayCoreDialogWrapperActivity"
-159-->[com.google.android.play:core-common:2.0.2] C:\Users\Anna\.gradle\caches\transforms-3\ee74d37f318b4ad7d4c9d4ea898856d8\transformed\core-common-2.0.2\AndroidManifest.xml:15:13-93
-160            android:exported="false"
-160-->[com.google.android.play:core-common:2.0.2] C:\Users\Anna\.gradle\caches\transforms-3\ee74d37f318b4ad7d4c9d4ea898856d8\transformed\core-common-2.0.2\AndroidManifest.xml:16:13-37
-161            android:stateNotNeeded="true"
-161-->[com.google.android.play:core-common:2.0.2] C:\Users\Anna\.gradle\caches\transforms-3\ee74d37f318b4ad7d4c9d4ea898856d8\transformed\core-common-2.0.2\AndroidManifest.xml:17:13-42
-162            android:theme="@style/Theme.PlayCore.Transparent" />
-162-->[com.google.android.play:core-common:2.0.2] C:\Users\Anna\.gradle\caches\transforms-3\ee74d37f318b4ad7d4c9d4ea898856d8\transformed\core-common-2.0.2\AndroidManifest.xml:18:13-62
-163    </application>
-164
-165</manifest>
+83        <activity
+83-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:40:9-43:20
+84            android:name="com.example.missingpets.ScanActivity"
+84-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:40:19-47
+85            android:label="MissingPets"
+85-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:41:13-40
+86            android:theme="@style/AppTheme" >
+86-->C:\Users\chiar\Desktop\MissingPets-navigation_and_announcements\MissingPets\app\src\main\AndroidManifest.xml:42:13-44
+87        </activity>
+88
+89        <service
+89-->[androidx.camera:camera-camera2:1.3.1] C:\Users\chiar\.gradle\caches\transforms-3\46cffb88752f07ce92e4954064f91dd7\transformed\camera-camera2-1.3.1\AndroidManifest.xml:24:9-33:19
+90            android:name="androidx.camera.core.impl.MetadataHolderService"
+90-->[androidx.camera:camera-camera2:1.3.1] C:\Users\chiar\.gradle\caches\transforms-3\46cffb88752f07ce92e4954064f91dd7\transformed\camera-camera2-1.3.1\AndroidManifest.xml:25:13-75
+91            android:enabled="false"
+91-->[androidx.camera:camera-camera2:1.3.1] C:\Users\chiar\.gradle\caches\transforms-3\46cffb88752f07ce92e4954064f91dd7\transformed\camera-camera2-1.3.1\AndroidManifest.xml:26:13-36
+92            android:exported="false" >
+92-->[androidx.camera:camera-camera2:1.3.1] C:\Users\chiar\.gradle\caches\transforms-3\46cffb88752f07ce92e4954064f91dd7\transformed\camera-camera2-1.3.1\AndroidManifest.xml:27:13-37
+93            <meta-data
+93-->[androidx.camera:camera-camera2:1.3.1] C:\Users\chiar\.gradle\caches\transforms-3\46cffb88752f07ce92e4954064f91dd7\transformed\camera-camera2-1.3.1\AndroidManifest.xml:30:13-32:89
+94                android:name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER"
+94-->[androidx.camera:camera-camera2:1.3.1] C:\Users\chiar\.gradle\caches\transforms-3\46cffb88752f07ce92e4954064f91dd7\transformed\camera-camera2-1.3.1\AndroidManifest.xml:31:17-103
+95                android:value="androidx.camera.camera2.Camera2Config$DefaultProvider" />
+95-->[androidx.camera:camera-camera2:1.3.1] C:\Users\chiar\.gradle\caches\transforms-3\46cffb88752f07ce92e4954064f91dd7\transformed\camera-camera2-1.3.1\AndroidManifest.xml:32:17-86
+96        </service> <!-- Needs to be explicitly declared on P+ -->
+97        <uses-library
+97-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\chiar\.gradle\caches\transforms-3\a11068ebd4ad6ad790462fc64f644bb3\transformed\play-services-maps-18.2.0\AndroidManifest.xml:39:9-41:40
+98            android:name="org.apache.http.legacy"
+98-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\chiar\.gradle\caches\transforms-3\a11068ebd4ad6ad790462fc64f644bb3\transformed\play-services-maps-18.2.0\AndroidManifest.xml:40:13-50
+99            android:required="false" />
+99-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\chiar\.gradle\caches\transforms-3\a11068ebd4ad6ad790462fc64f644bb3\transformed\play-services-maps-18.2.0\AndroidManifest.xml:41:13-37
+100
+101        <activity
+101-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\chiar\.gradle\caches\transforms-3\ba8a0efc44ed572ec1147975e9bd7466\transformed\play-services-base-18.1.0\AndroidManifest.xml:20:9-22:45
+102            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+102-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\chiar\.gradle\caches\transforms-3\ba8a0efc44ed572ec1147975e9bd7466\transformed\play-services-base-18.1.0\AndroidManifest.xml:20:19-85
+103            android:exported="false"
+103-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\chiar\.gradle\caches\transforms-3\ba8a0efc44ed572ec1147975e9bd7466\transformed\play-services-base-18.1.0\AndroidManifest.xml:22:19-43
+104            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+104-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\chiar\.gradle\caches\transforms-3\ba8a0efc44ed572ec1147975e9bd7466\transformed\play-services-base-18.1.0\AndroidManifest.xml:21:19-78
+105
+106        <meta-data
+106-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\chiar\.gradle\caches\transforms-3\11ac194e9c6d5838d05962901ca101e5\transformed\play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
+107            android:name="com.google.android.gms.version"
+107-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\chiar\.gradle\caches\transforms-3\11ac194e9c6d5838d05962901ca101e5\transformed\play-services-basement-18.1.0\AndroidManifest.xml:22:13-58
+108            android:value="@integer/google_play_services_version" />
+108-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\chiar\.gradle\caches\transforms-3\11ac194e9c6d5838d05962901ca101e5\transformed\play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
+109
+110        <activity
+110-->[androidx.compose.ui:ui-test-manifest:1.5.1] C:\Users\chiar\.gradle\caches\transforms-3\eada017dea41128ad335cfbd3fc92946\transformed\ui-test-manifest-1.5.1\AndroidManifest.xml:23:9-25:39
+111            android:name="androidx.activity.ComponentActivity"
+111-->[androidx.compose.ui:ui-test-manifest:1.5.1] C:\Users\chiar\.gradle\caches\transforms-3\eada017dea41128ad335cfbd3fc92946\transformed\ui-test-manifest-1.5.1\AndroidManifest.xml:24:13-63
+112            android:exported="true" />
+112-->[androidx.compose.ui:ui-test-manifest:1.5.1] C:\Users\chiar\.gradle\caches\transforms-3\eada017dea41128ad335cfbd3fc92946\transformed\ui-test-manifest-1.5.1\AndroidManifest.xml:25:13-36
+113
+114        <provider
+114-->[androidx.emoji2:emoji2:1.4.0] C:\Users\chiar\.gradle\caches\transforms-3\c14e31871ebf0cfbe8205058ee24981f\transformed\emoji2-1.4.0\AndroidManifest.xml:24:9-32:20
+115            android:name="androidx.startup.InitializationProvider"
+115-->[androidx.emoji2:emoji2:1.4.0] C:\Users\chiar\.gradle\caches\transforms-3\c14e31871ebf0cfbe8205058ee24981f\transformed\emoji2-1.4.0\AndroidManifest.xml:25:13-67
+116            android:authorities="com.example.missingpets.androidx-startup"
+116-->[androidx.emoji2:emoji2:1.4.0] C:\Users\chiar\.gradle\caches\transforms-3\c14e31871ebf0cfbe8205058ee24981f\transformed\emoji2-1.4.0\AndroidManifest.xml:26:13-68
+117            android:exported="false" >
+117-->[androidx.emoji2:emoji2:1.4.0] C:\Users\chiar\.gradle\caches\transforms-3\c14e31871ebf0cfbe8205058ee24981f\transformed\emoji2-1.4.0\AndroidManifest.xml:27:13-37
+118            <meta-data
+118-->[androidx.emoji2:emoji2:1.4.0] C:\Users\chiar\.gradle\caches\transforms-3\c14e31871ebf0cfbe8205058ee24981f\transformed\emoji2-1.4.0\AndroidManifest.xml:29:13-31:52
+119                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+119-->[androidx.emoji2:emoji2:1.4.0] C:\Users\chiar\.gradle\caches\transforms-3\c14e31871ebf0cfbe8205058ee24981f\transformed\emoji2-1.4.0\AndroidManifest.xml:30:17-75
+120                android:value="androidx.startup" />
+120-->[androidx.emoji2:emoji2:1.4.0] C:\Users\chiar\.gradle\caches\transforms-3\c14e31871ebf0cfbe8205058ee24981f\transformed\emoji2-1.4.0\AndroidManifest.xml:31:17-49
+121            <meta-data
+121-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\chiar\.gradle\caches\transforms-3\306cbcd7c88151e458bf6b3a8b1ecb8a\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:29:13-31:52
+122                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+122-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\chiar\.gradle\caches\transforms-3\306cbcd7c88151e458bf6b3a8b1ecb8a\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:30:17-78
+123                android:value="androidx.startup" />
+123-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\chiar\.gradle\caches\transforms-3\306cbcd7c88151e458bf6b3a8b1ecb8a\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:31:17-49
+124            <meta-data
+124-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chiar\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
+125                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+125-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chiar\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
+126                android:value="androidx.startup" />
+126-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chiar\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
+127        </provider>
+128
+129        <activity
+129-->[androidx.compose.ui:ui-tooling-android:1.5.1] C:\Users\chiar\.gradle\caches\transforms-3\b5564c6f1789b095f7d8b5a7f019dbae\transformed\ui-tooling-release\AndroidManifest.xml:23:9-25:39
+130            android:name="androidx.compose.ui.tooling.PreviewActivity"
+130-->[androidx.compose.ui:ui-tooling-android:1.5.1] C:\Users\chiar\.gradle\caches\transforms-3\b5564c6f1789b095f7d8b5a7f019dbae\transformed\ui-tooling-release\AndroidManifest.xml:24:13-71
+131            android:exported="true" />
+131-->[androidx.compose.ui:ui-tooling-android:1.5.1] C:\Users\chiar\.gradle\caches\transforms-3\b5564c6f1789b095f7d8b5a7f019dbae\transformed\ui-tooling-release\AndroidManifest.xml:25:13-36
+132
+133        <uses-library
+133-->[androidx.window:window:1.0.0] C:\Users\chiar\.gradle\caches\transforms-3\dd234376387c9ee643b64286eeaf4450\transformed\window-1.0.0\AndroidManifest.xml:25:9-27:40
+134            android:name="androidx.window.extensions"
+134-->[androidx.window:window:1.0.0] C:\Users\chiar\.gradle\caches\transforms-3\dd234376387c9ee643b64286eeaf4450\transformed\window-1.0.0\AndroidManifest.xml:26:13-54
+135            android:required="false" />
+135-->[androidx.window:window:1.0.0] C:\Users\chiar\.gradle\caches\transforms-3\dd234376387c9ee643b64286eeaf4450\transformed\window-1.0.0\AndroidManifest.xml:27:13-37
+136        <uses-library
+136-->[androidx.window:window:1.0.0] C:\Users\chiar\.gradle\caches\transforms-3\dd234376387c9ee643b64286eeaf4450\transformed\window-1.0.0\AndroidManifest.xml:28:9-30:40
+137            android:name="androidx.window.sidecar"
+137-->[androidx.window:window:1.0.0] C:\Users\chiar\.gradle\caches\transforms-3\dd234376387c9ee643b64286eeaf4450\transformed\window-1.0.0\AndroidManifest.xml:29:13-51
+138            android:required="false" />
+138-->[androidx.window:window:1.0.0] C:\Users\chiar\.gradle\caches\transforms-3\dd234376387c9ee643b64286eeaf4450\transformed\window-1.0.0\AndroidManifest.xml:30:13-37
+139
+140        <receiver
+140-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chiar\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
+141            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+141-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chiar\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
+142            android:directBootAware="false"
+142-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chiar\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
+143            android:enabled="true"
+143-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chiar\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
+144            android:exported="true"
+144-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chiar\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
+145            android:permission="android.permission.DUMP" >
+145-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chiar\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
+146            <intent-filter>
+146-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chiar\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
+147                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+147-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chiar\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
+147-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chiar\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
+148            </intent-filter>
+149            <intent-filter>
+149-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chiar\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
+150                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+150-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chiar\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
+150-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chiar\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
+151            </intent-filter>
+152            <intent-filter>
+152-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chiar\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
+153                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+153-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chiar\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
+153-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chiar\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
+154            </intent-filter>
+155            <intent-filter>
+155-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chiar\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
+156                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+156-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chiar\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
+156-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chiar\.gradle\caches\transforms-3\8b2d4a47e939d75c13c98b5efed73977\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
+157            </intent-filter>
+158        </receiver> <!-- The activities will be merged into the manifest of the hosting app. -->
+159        <activity
+159-->[com.google.android.play:core-common:2.0.2] C:\Users\chiar\.gradle\caches\transforms-3\ee74d37f318b4ad7d4c9d4ea898856d8\transformed\core-common-2.0.2\AndroidManifest.xml:14:9-18:65
+160            android:name="com.google.android.play.core.common.PlayCoreDialogWrapperActivity"
+160-->[com.google.android.play:core-common:2.0.2] C:\Users\chiar\.gradle\caches\transforms-3\ee74d37f318b4ad7d4c9d4ea898856d8\transformed\core-common-2.0.2\AndroidManifest.xml:15:13-93
+161            android:exported="false"
+161-->[com.google.android.play:core-common:2.0.2] C:\Users\chiar\.gradle\caches\transforms-3\ee74d37f318b4ad7d4c9d4ea898856d8\transformed\core-common-2.0.2\AndroidManifest.xml:16:13-37
+162            android:stateNotNeeded="true"
+162-->[com.google.android.play:core-common:2.0.2] C:\Users\chiar\.gradle\caches\transforms-3\ee74d37f318b4ad7d4c9d4ea898856d8\transformed\core-common-2.0.2\AndroidManifest.xml:17:13-42
+163            android:theme="@style/Theme.PlayCore.Transparent" />
+163-->[com.google.android.play:core-common:2.0.2] C:\Users\chiar\.gradle\caches\transforms-3\ee74d37f318b4ad7d4c9d4ea898856d8\transformed\core-common-2.0.2\AndroidManifest.xml:18:13-62
+164    </application>
+165
+166</manifest>

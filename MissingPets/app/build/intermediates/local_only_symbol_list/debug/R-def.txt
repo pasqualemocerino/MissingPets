@@ -11,11 +11,15 @@ drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_position
 drawable logo
+id camera_button
+id click_image
 id map
+layout layout_camera
 layout layout_map
 mipmap ic_launcher
 mipmap ic_launcher_round
 string app_name
+style AppTheme
 style Theme.MissingPets
 xml backup_rules
 xml data_extraction_rules

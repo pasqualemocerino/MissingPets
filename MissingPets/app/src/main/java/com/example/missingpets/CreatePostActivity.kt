@@ -135,8 +135,9 @@ class CreatePostActivity : ComponentActivity() {
         ) {
             // Titolo
             Text(
-                text = "Create a new post",
-                fontSize = 30.sp
+                text = "Create your announcement",
+                fontSize = 20.sp,
+                modifier = Modifier.padding(top = 16.dp)
             )
 
             // Per mostrare la schermata di caricamento quando invii il post
@@ -162,7 +163,7 @@ class CreatePostActivity : ComponentActivity() {
             Spacer(Modifier.fillMaxHeight(0.35f))   // spazio vuoto sopra la scritta
 
             Text(
-                text = "Creating post...",
+                text = "Showing announcements...",
                 fontSize = 20.sp,
                 modifier = Modifier.padding(20.dp)
                 //textAlign = Alignment.Center
@@ -205,7 +206,7 @@ class CreatePostActivity : ComponentActivity() {
             DescriptionField()
 
             // Pulsante per creare il post
-            Button(onClick = {
+            ElevatedButton(onClick = {
                 // Controlla se i campi sono validi
                 if (validateFields(missingFieldErrors)) {
 
@@ -231,8 +232,9 @@ class CreatePostActivity : ComponentActivity() {
                     finish()
                     */
                 }
-            }) {
-                Text("Create Post")
+            },
+                modifier = Modifier.padding(top = 16.dp)) {
+                Text("Post announcement")
             }
         }
     }
@@ -244,11 +246,12 @@ class CreatePostActivity : ComponentActivity() {
         var text by remember { mutableStateOf("") }
 
         Column {
-            Row (
-                verticalAlignment = Alignment.CenterVertically
+            Column (
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
             ){
                 Text(
-                    text = "Pet name: "
+                    text = "Pet name"
                 )
                 OutlinedTextField(
                     value = text,        // il valore mostrato nel campo
@@ -258,7 +261,7 @@ class CreatePostActivity : ComponentActivity() {
                         petName = text
                         showPetNameError.value = false     // nascondi messaggio di errore
                     },
-                    label = { Text("Pet name") }
+                    label = { Text("Insert pet name") }
                 )
             }
             // Messaggio di errore
@@ -308,11 +311,12 @@ class CreatePostActivity : ComponentActivity() {
 
             photo = AppCompatImageView(this@CreatePostActivity)
 
-            Row (
-                verticalAlignment = Alignment.CenterVertically
+            Column (
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
             ){
                 Text(
-                    text = "Photo: "
+                    text = "Photo"
                 )
                 val pickImg = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
                 Button(onClick = {
@@ -322,13 +326,13 @@ class CreatePostActivity : ComponentActivity() {
 
                     showPhotoError.value = false     // nascondi messaggio di errore
                 }) {
-                    Text(text = "Choose")
+                    Text(text = "Select")
                 }
             }
             // Messaggio di errore
             if (showPhotoError.value) {
                 Text(
-                    text = "Please choose a photo.",
+                    text = "Please select a photo.",
                     fontSize = 14.sp,
                     color = Color.Red
                 )
@@ -342,11 +346,13 @@ class CreatePostActivity : ComponentActivity() {
         var text by remember { mutableStateOf("") }
 
         Column {
-            Row (
-                verticalAlignment = Alignment.CenterVertically
+            Column (
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
             ){
                 Text(
-                    text = "Date: "
+                    text = "Date",
+                    Modifier.padding(bottom = 4.dp)
                 )
                 // Campo dove appare la data selezionata
                 Text(
@@ -372,13 +378,13 @@ class CreatePostActivity : ComponentActivity() {
                 Button(onClick = {
                     datePickerDialog.show()
                 }) {
-                    Text(text = "Choose")
+                    Text(text = "Select")
                 }
             }
             // Messaggio di errore
             if (showDateError.value) {
                 Text(
-                    text = "Please choose a date.",
+                    text = "Please select a date",
                     fontSize = 14.sp,
                     color = Color.Red
                 )
@@ -394,11 +400,13 @@ class CreatePostActivity : ComponentActivity() {
         val options = arrayOf(PET_TYPE_DOG, PET_TYPE_CAT)
         var selectedText by remember { mutableStateOf(options[0]) }
 
-        Row (
-            verticalAlignment = Alignment.CenterVertically
+        Column (
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ){
             Text(
-                text = "Pet category: "
+                text = "Pet category",
+                modifier = Modifier.padding(bottom = 8.dp)
             )
 
             Box(
@@ -449,11 +457,12 @@ class CreatePostActivity : ComponentActivity() {
         val dialogState: MutableState<Boolean> = remember {mutableStateOf(false)}
 
         Column {
-            Row (
-                verticalAlignment = Alignment.CenterVertically
+            Column (
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
             ){
                 Text(
-                    text = "Position: "
+                    text = "Position"
                 )
                 // Campo dove appare la posizione selezionata
                 Text(
@@ -465,7 +474,7 @@ class CreatePostActivity : ComponentActivity() {
                     dialogState.value = true
                 }) {
                     Text(
-                        text = "Choose",
+                        text = "Select",
                         //fontSize = 22.sp
                     )
                 }
@@ -476,7 +485,7 @@ class CreatePostActivity : ComponentActivity() {
                 AlertDialog(
                     onDismissRequest = { dialogState.value = false },
                     title = {
-                        Text(text = "Choose the position")
+                        Text(text = "Select a position")
                     },
                     text = {
                         Box(
@@ -528,7 +537,7 @@ class CreatePostActivity : ComponentActivity() {
             // Messaggio di errore
             if (showPositionError.value) {
                 Text(
-                    text = "Please choose a position.",
+                    text = "Please select a position.",
                     fontSize = 14.sp,
                     color = Color.Red
                 )
@@ -542,11 +551,12 @@ class CreatePostActivity : ComponentActivity() {
     @Composable
     fun DescriptionField() {
         var text by remember { mutableStateOf(description) }
-        Row (
-            verticalAlignment = Alignment.CenterVertically
+        Column (
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ){
             Text(
-                text = "Description: "
+                text = "Description"
             )
             OutlinedTextField(
                 value = text,        // il valore mostrato nel campo
@@ -555,7 +565,7 @@ class CreatePostActivity : ComponentActivity() {
                     text = it.take(descriptionMaxLength)
                     description = text
                 },
-                label = { Text("Description") }
+                label = { Text("Insert pet description") }
             )
         }
     }

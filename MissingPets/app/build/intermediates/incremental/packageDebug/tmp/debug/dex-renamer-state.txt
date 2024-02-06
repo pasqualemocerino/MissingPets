@@ -1,18 +1,18 @@
-#Sat Feb 03 18:55:32 CET 2024
-base.0=C\:\\Users\\Anna\\Documents\\GitHub\\MissingPets\\MissingPets\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
-base.1=C\:\\Users\\Anna\\Documents\\GitHub\\MissingPets\\MissingPets\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.2=C\:\\Users\\Anna\\Documents\\GitHub\\MissingPets\\MissingPets\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\15\\classes.dex
-base.3=C\:\\Users\\Anna\\Documents\\GitHub\\MissingPets\\MissingPets\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\8\\classes.dex
-base.4=C\:\\Users\\Anna\\Documents\\GitHub\\MissingPets\\MissingPets\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
-base.5=C\:\\Users\\Anna\\Documents\\GitHub\\MissingPets\\MissingPets\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes3.dex
-base.6=C\:\\Users\\Anna\\Documents\\GitHub\\MissingPets\\MissingPets\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\2\\classes.dex
+#Mon Feb 05 22:53:20 CET 2024
+base.0=C\:\\Users\\chiar\\Desktop\\MissingPets-navigation_and_announcements\\MissingPets\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+base.1=C\:\\Users\\chiar\\Desktop\\MissingPets-navigation_and_announcements\\MissingPets\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.2=C\:\\Users\\chiar\\Desktop\\MissingPets-navigation_and_announcements\\MissingPets\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\15\\classes.dex
+base.3=C\:\\Users\\chiar\\Desktop\\MissingPets-navigation_and_announcements\\MissingPets\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\2\\classes.dex
+base.4=C\:\\Users\\chiar\\Desktop\\MissingPets-navigation_and_announcements\\MissingPets\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\8\\classes.dex
+base.5=C\:\\Users\\chiar\\Desktop\\MissingPets-navigation_and_announcements\\MissingPets\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
+base.6=C\:\\Users\\chiar\\Desktop\\MissingPets-navigation_and_announcements\\MissingPets\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes3.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.2=15/classes.dex
-path.3=8/classes.dex
-path.4=classes2.dex
-path.5=classes3.dex
-path.6=2/classes.dex
+path.3=2/classes.dex
+path.4=8/classes.dex
+path.5=classes2.dex
+path.6=classes3.dex
 renamed.0=classes.dex
 renamed.1=classes2.dex
 renamed.2=classes3.dex

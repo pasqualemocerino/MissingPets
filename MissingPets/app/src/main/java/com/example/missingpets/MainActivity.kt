@@ -108,7 +108,7 @@ class MainActivity : ComponentActivity() {
             Logo(navController = navController, username = "Chiara")
             val context = LocalContext.current
             Button(onClick = {
-                context.startActivity(Intent(context, CameraActivity::class.java))
+                context.startActivity(Intent(context, ScanActivity::class.java))
             }) {
                 Text(text = "Start Camera")
             }

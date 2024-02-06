@@ -34,13 +34,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".CameraActivity">
-        </activity>
-
         <activity android:name=".CreatePostActivity">
         </activity>
 
-        <activity android:name=".ScanActivity">
+        <activity android:name=".ScanActivity"
+            android:label="MissingPets"
+            android:theme="@style/AppTheme">
         </activity>
 
 
