@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "84234469087",
+    "project_id": "fir-app-36d72",
+    "storage_bucket": "fir-app-36d72.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:84234469087:android:70c6fba8bbbc4a7c36b36a",
+        "android_client_info": {
+          "package_name": "com.macc.missingpets"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyCgpRmzUk2Sz4ZvEUZ4gfDIXKH8O-SHQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
