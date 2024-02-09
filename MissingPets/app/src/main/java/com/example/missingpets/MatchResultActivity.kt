@@ -83,7 +83,7 @@ class MatchResultActivity: ComponentActivity() {
                         // Lista dei post
                         Column(
                             Modifier
-                                .heightIn(0.dp, (screenHeightDp * 0.8f).dp)
+                                .heightIn(0.dp, (screenHeightDp * 0.75f).dp)
                                 .verticalScroll(rememberScrollState()),
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.spacedBy(10.dp)   // per lasciare spazio tra un elemento e l'altro
@@ -94,6 +94,12 @@ class MatchResultActivity: ComponentActivity() {
                             }
                         }
 
+                        // Pulsante per tornare alla home
+                        Button(
+                            onClick = { finish() }
+                        ){
+                            Text("Home")
+                        }
                     }
                 }
             }

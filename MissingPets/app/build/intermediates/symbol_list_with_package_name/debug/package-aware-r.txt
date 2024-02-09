@@ -1798,6 +1798,7 @@ drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
 drawable center
+drawable circular_progress_bar
 drawable common_full_open_on_phone
 drawable common_google_signin_btn_icon_dark
 drawable common_google_signin_btn_icon_dark_focused
@@ -1905,6 +1906,7 @@ id BOTTOM_END
 id BOTTOM_START
 id CTRL
 id FUNCTION
+id HeaderTextView
 id META
 id NO_DEBUG
 id SHIFT
@@ -2133,6 +2135,7 @@ id line3
 id linear
 id listMode
 id list_item
+id loading_screen
 id locale
 id ltr
 id map
@@ -2209,6 +2212,7 @@ id on
 id outline
 id outward
 id packed
+id page_content
 id parallax
 id parent
 id parentPanel
@@ -2224,6 +2228,7 @@ id pin
 id pooling_container_listener_holder_tag
 id position
 id postLayout
+id progressBar1
 id progress_action
 id progress_circular
 id progress_horizontal
@@ -2325,6 +2330,7 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTop
+id textViewMessage
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon

@@ -1797,6 +1797,7 @@ int drawable btn_radio_off_to_on_mtrl_animation 0x7f07005f
 int drawable btn_radio_on_mtrl 0x7f070060
 int drawable btn_radio_on_to_off_mtrl_animation 0x7f070061
 int drawable center 0x7f070062
+int drawable circular_progress_bar 0x7f0700c9
 int drawable common_full_open_on_phone 0x7f070063
 int drawable common_google_signin_btn_icon_dark 0x7f070064
 int drawable common_google_signin_btn_icon_dark_focused 0x7f070065
@@ -1904,6 +1905,7 @@ int id BOTTOM_END 0x7f080001
 int id BOTTOM_START 0x7f080002
 int id CTRL 0x7f080003
 int id FUNCTION 0x7f080004
+int id HeaderTextView 0x7f0801da
 int id META 0x7f080005
 int id NO_DEBUG 0x7f080006
 int id SHIFT 0x7f080007
@@ -2132,6 +2134,7 @@ int id line3 0x7f0800e3
 int id linear 0x7f0800e4
 int id listMode 0x7f0800e5
 int id list_item 0x7f0800e6
+int id loading_screen 0x7f0801d7
 int id locale 0x7f0800e7
 int id ltr 0x7f0800e8
 int id map 0x7f0800e9
@@ -2208,6 +2211,7 @@ int id on 0x7f08012f
 int id outline 0x7f080130
 int id outward 0x7f080131
 int id packed 0x7f080132
+int id page_content 0x7f0801d8
 int id parallax 0x7f080133
 int id parent 0x7f080134
 int id parentPanel 0x7f080135
@@ -2223,6 +2227,7 @@ int id pin 0x7f08013e
 int id pooling_container_listener_holder_tag 0x7f08013f
 int id position 0x7f080140
 int id postLayout 0x7f080141
+int id progressBar1 0x7f0801d9
 int id progress_action 0x7f080142
 int id progress_circular 0x7f080143
 int id progress_horizontal 0x7f080144
@@ -2324,6 +2329,7 @@ int id textSpacerNoButtons 0x7f0801a3
 int id textSpacerNoTitle 0x7f0801a4
 int id textStart 0x7f0801a5
 int id textTop 0x7f0801a6
+int id textViewMessage 0x7f0801d6
 int id text_input_end_icon 0x7f0801a7
 int id text_input_error_icon 0x7f0801a8
 int id text_input_start_icon 0x7f0801a9

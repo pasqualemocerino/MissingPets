@@ -285,14 +285,13 @@ class CreatePostActivity : ComponentActivity() {
                 )
                 val pickImg = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
                 Button(onClick = {
-
                     if (!checkStoragePermission()) {       // chiedi permessi storage
                         requestStoragePermission()
                     }
-
-                    changeImage.launch(pickImg)
-
-                    showPhotoError.value = false     // nascondi messaggio di errore
+                    else {
+                        changeImage.launch(pickImg)
+                        showPhotoError.value = false     // nascondi messaggio di errore
+                    }
                 }) {
                     Text(text = "Choose")
                 }
@@ -441,8 +440,9 @@ class CreatePostActivity : ComponentActivity() {
                     if (!checkGPSPermission()) {       // chiedi permessi GPS
                         requestGPSPermission()
                     }
-
-                    dialogState.value = true
+                    else {
+                        dialogState.value = true        // apri dialog con mappa
+                    }
                 }) {
                     Text(
                         text = "Choose",
