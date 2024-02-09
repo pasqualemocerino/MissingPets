@@ -591,6 +591,7 @@ class CreatePostActivity : ComponentActivity() {
 
 
     // Per chiedere i permessi dello storage
+    /*
     private fun checkStoragePermission(): Boolean {
         val result = ContextCompat.checkSelfPermission(applicationContext, android.Manifest.permission.READ_EXTERNAL_STORAGE)
         val result1 = ContextCompat.checkSelfPermission(applicationContext, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -604,7 +605,18 @@ class CreatePostActivity : ComponentActivity() {
             android.Manifest.permission.READ_MEDIA_IMAGES
         ), 1)
     }
-
+    */
+    private fun checkStoragePermission(): Boolean {
+        val result = ContextCompat.checkSelfPermission(applicationContext, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+        val result1 = ContextCompat.checkSelfPermission(applicationContext, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        return (result == PackageManager.PERMISSION_GRANTED) && (result1 == PackageManager.PERMISSION_GRANTED)
+    }
+    private fun requestStoragePermission() {
+        ActivityCompat.requestPermissions(this, arrayOf(
+            android.Manifest.permission.READ_EXTERNAL_STORAGE,
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+        ), 1)
+    }
 
     // Per chiedere i permessi del GPS
     private fun checkGPSPermission(): Boolean {
