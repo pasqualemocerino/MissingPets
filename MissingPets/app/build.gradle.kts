@@ -107,7 +107,6 @@ dependencies {
     implementation("androidx.compose.material:material")
     implementation("androidx.compose.runtime:runtime-livedata")
     implementation("androidx.compose.ui:ui-tooling")
-    //implementation("com.google.android.material:compose-theme-adapter")
 
     val nav_version = "2.7.6"
 

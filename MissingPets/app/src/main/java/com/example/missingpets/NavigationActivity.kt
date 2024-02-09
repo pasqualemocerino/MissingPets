@@ -3,6 +3,7 @@ package com.example.missingpets
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.graphics.BitmapFactory
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -11,9 +12,13 @@ import android.hardware.SensorManager
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -21,13 +26,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -41,6 +45,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -83,7 +88,17 @@ class NavigationActivity : ComponentActivity(), SensorEventListener {
     private val orientation = FloatArray(3)
 
     // Orientamento telefono rispetto al polo nord
-    private var angleOrientation: Float = 0f
+    private var angleOrientation = mutableStateOf(0f)
+
+
+    // PER L'INCLINAZIONE
+    //val ctrScreenPitch=FloatArray(2)
+    //val ctrImgPitch = FloatArray(2)
+    private var inclinometer: Sensor? = null
+    private var screenPitch: Float = 1f
+    // Nota: il pitch va da -90 a 90. Se il telefono e' pioggiato in piano, pitch = 0.
+    // Se dalla posizione orizzontale lo si mette in verticale il pitch diventa negativo.
+    // Quindi -90 significa che e' in verticale.
 
     // PER IL GPS
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -98,10 +113,10 @@ class NavigationActivity : ComponentActivity(), SensorEventListener {
     private var currentLocation: Location = Location("")
 
     // Angolo destinazione rispetto al polo nord
-    private var bearing: Double = 0.0
+    private var bearing = mutableStateOf(0.0)
 
     // Distanza tra posizione attuale e destinazione
-    private var distance: Double = 0.0
+    private var distance = mutableStateOf(0.0)
 
     // Per mostrare la schermata di caricamento finche' il GPS non funziona
     private var waitingForGps = true
@@ -109,6 +124,10 @@ class NavigationActivity : ComponentActivity(), SensorEventListener {
     // Per forzare il recompose della pagina quando i sensori ricevono nuovi dati
     private val recomposeToggleState: MutableState<Boolean> = mutableStateOf(false)
 
+
+    // Valori attuali
+    private var currentAngle = 0f
+    private var currentHeightModifier = 1f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -133,6 +152,15 @@ class NavigationActivity : ComponentActivity(), SensorEventListener {
         accelerometer = sensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 
 
+        // Roba per l'inclinazione del telefono:
+        inclinometer = sensorManager!!.getDefaultSensor(Sensor.TYPE_ORIENTATION)
+        (this.getSystemService(Context.SENSOR_SERVICE) as SensorManager).also {
+            it.registerListener(this,
+                it.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR),
+                SensorManager.SENSOR_DELAY_NORMAL)
+        }
+
+
         // Roba per il GPS:
 
         if (!checkPermission()) {       // chiedi permessi posizione
@@ -141,8 +169,8 @@ class NavigationActivity : ComponentActivity(), SensorEventListener {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         locationRequest = LocationRequest.create()
-        locationRequest.interval = 60000
-        locationRequest.fastestInterval = 5000
+        locationRequest.interval = 5000
+        locationRequest.fastestInterval = 1000
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
@@ -194,6 +222,12 @@ class NavigationActivity : ComponentActivity(), SensorEventListener {
 
                         // Temporaneo
                         //ButtonsCoordinates()
+
+                        /*
+                        Text(
+                            text = "pitch: " + screenPitch.toString()
+                        )
+                        */
                     }
 
                     // Per far si' che il recompose forzato funzioni
@@ -201,44 +235,6 @@ class NavigationActivity : ComponentActivity(), SensorEventListener {
                 }
             }
         }
-    }
-
-    // TEMPORANEO
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
-    fun ButtonsCoordinates() {
-        var lat:String by remember { mutableStateOf("41.934124") }
-        var lon:String by remember { mutableStateOf("12.478321") }
-
-        Column() {
-            OutlinedTextField(
-                value = lat,        // il valore mostrato nel campo
-                onValueChange = {
-                    // Prendi massimo descriptionMaxLength caratteri
-                    lat = it
-                },
-                label = { Text("Latitude") }
-            )
-            OutlinedTextField(
-                value = lon,        // il valore mostrato nel campo
-                onValueChange = {
-                    // Prendi massimo descriptionMaxLength caratteri
-                    lon = it
-                },
-                label = { Text("Longitude") }
-            )
-            Button(
-                onClick = {
-                    goalLocation.latitude = lat.trim().toDouble()
-                    goalLocation.longitude = lon.trim().toDouble()
-                    updateCurrentLocation(currentLocation)
-                    manualRecompose()
-                }
-            ) {
-                Text("Set new goal")
-            }
-        }
-
     }
 
     @Composable
@@ -286,7 +282,7 @@ class NavigationActivity : ComponentActivity(), SensorEventListener {
 
     @Composable
     fun DistanceText() {
-        val dist = distance.toFloat()
+        val dist = distance.value.toFloat()
         var distanceString = ""
         if (dist < 1000) {
             distanceString = round(dist).toInt().toString() + " m"   // stampiamo i metri senza cifre decimali
@@ -307,13 +303,76 @@ class NavigationActivity : ComponentActivity(), SensorEventListener {
         val arrow = BitmapFactory.decodeStream(this.assets.open("arrow.png"))
         val arrowBitmap = arrow!!.asImageBitmap()
 
-        Image(
-            bitmap = arrowBitmap,
-            contentDescription = "arrow",
-            modifier = Modifier.rotate(-angleOrientation + bearing.toFloat()),
-            contentScale = ContentScale.None
-        )
+        val configuration: Configuration = this.getResources().getConfiguration()
+        var screenWidthDp = configuration.screenWidthDp
+        var screenHeightDp = configuration.screenHeightDp
 
+        // MISURE INIZIALI IMMAGINE (se mettiamo un'immagine non quadrata, le proporzioni vanno cambiate qua)
+        val imageHeight = screenWidthDp
+        val imageWidth = imageHeight
+
+        var heightModifierGoal = abs(screenPitch) / 90  // perche' il fattore deve andare da 0 a 1, mentre il pitch va da 0 a 90
+        if (heightModifierGoal <= 0.01) heightModifierGoal = 0.01f
+
+
+        /*
+        val angle: Float by animateFloatAsState(
+            if (enabled) currentAngle
+            else -angleOrientation.value + bearing.value.toFloat(),
+            finishedListener = {
+                currentAngle = -angleOrientation.value + bearing.value.toFloat()
+            },
+            animationSpec = tween(800, easing = LinearEasing)
+        )
+        */
+
+        // ANIMAZIONE
+        var enabled by remember { mutableStateOf(false) }
+
+        val transition = updateTransition(targetState = enabled, label = "")
+
+        val angle by transition.animateFloat(
+            transitionSpec = {tween(durationMillis = 500, easing = FastOutSlowInEasing)},
+            label = ""
+        ) {
+            when(it) {
+                true -> currentAngle
+                false -> -angleOrientation.value + bearing.value.toFloat()
+            }
+        }
+
+        val heightModifier by transition.animateFloat(
+            transitionSpec = {tween(durationMillis = 500, easing = LinearEasing)},
+            label = ""
+        ) {
+            when(it) {
+                true -> currentHeightModifier
+                false -> heightModifierGoal
+            }
+        }
+
+
+        Box(    // Obiettivo: far occupare all'immagine della freccia sempre lo stesso spazio nella pagina
+            modifier = Modifier
+                .height(imageHeight.dp)
+                .width(imageWidth.dp)
+        ) {
+            Box(  // Obiettivo: schiacciare la freccia verticalmente in base all'inclinazione
+                modifier = Modifier
+                    .graphicsLayer(
+                        scaleY = heightModifier,
+                    )
+                    .align(Alignment.Center)
+            ) {
+                Image(
+                    bitmap = arrowBitmap,
+                    contentDescription = "arrow",
+                    modifier = Modifier
+                        .rotate(angle),
+                    contentScale = ContentScale.FillBounds      // necessario per schiacciarla
+                )
+            }
+        }
     }
 
 
@@ -323,14 +382,23 @@ class NavigationActivity : ComponentActivity(), SensorEventListener {
 
     // Callback per i sensori
     override fun onSensorChanged(event: SensorEvent) {
+
+        var shouldRecompose = false
+
+        // Magnetometer
         if (event.sensor == magnetometer) {
             System.arraycopy(event.values, 0, lastMagnetometer, 0, event.values.size)
             lastMagnetometerSet = true
-        } else if (event.sensor == accelerometer) {
+        }
+        // Accelerometer
+        else if (event.sensor == accelerometer) {
             System.arraycopy(event.values, 0, lastAccelerometer, 0, event.values.size)
             lastAccelerometerSet = true
         }
-        if (lastAccelerometerSet && lastMagnetometerSet) {
+            /*
+        // Orientation
+        else if (event.sensor == inclinometer) {
+
             SensorManager.getRotationMatrix(
                 rotationMatrix,
                 null,
@@ -339,13 +407,51 @@ class NavigationActivity : ComponentActivity(), SensorEventListener {
             )
             SensorManager.getOrientation(rotationMatrix, orientation)
             val azimuthInRadians = orientation[0]
-            val azimuthInDegrees = (Math.toDegrees(azimuthInRadians.toDouble()) + 360).toFloat() % 360
 
-            if (abs(azimuthInDegrees - angleOrientation) > 5) {
-                angleOrientation = azimuthInDegrees
-                manualRecompose()
+            val newPitchRadians = event.values[1]   // values[0] = azimuth, values[1] = pitch, values[2] = roll
+            val newPitch = (Math.toDegrees(newPitchRadians.toDouble()) + 360).toFloat() % 360
+
+            //if (abs(newPitch - screenPitch) >= 0.01) {
+                screenPitch = newPitch
+                shouldRecompose = true
+            //}
+        }
+        */
+
+
+        if (lastAccelerometerSet && lastMagnetometerSet) {
+            SensorManager.getRotationMatrix(
+                rotationMatrix,
+                null,
+                lastAccelerometer,
+                lastMagnetometer
+            )
+            SensorManager.getOrientation(rotationMatrix, orientation)
+
+            // AZIMUTH (inclinazione laterale)
+            val azimuthInRadians = orientation[0]
+            val azimuthInDegrees = (Math.toDegrees(azimuthInRadians.toDouble()) + 360).toFloat() % 360
+            if (abs(azimuthInDegrees - angleOrientation.value) >= 2) {
+                angleOrientation.value = azimuthInDegrees
+                shouldRecompose = true
+            }
+
+            // PITCH (inclinazione frontale)
+            val pitchInRadians = orientation[1]   // values[0] = azimuth, values[1] = pitch, values[2] = roll
+            var pitchInDegrees = (Math.toDegrees(pitchInRadians.toDouble()) + 360).toFloat() % 360
+            pitchInDegrees = (pitchInDegrees - 270) % 90
+            if (abs(pitchInDegrees - screenPitch) >= 2) {
+                screenPitch = pitchInDegrees
+                shouldRecompose = true
             }
         }
+
+        /*
+        // Ri-disegna tutto
+        if (shouldRecompose) {
+            manualRecompose()
+        }
+        */
     }
 
     // Registra listener per gli eventi dei sensori
@@ -384,8 +490,8 @@ class NavigationActivity : ComponentActivity(), SensorEventListener {
 
         currentLocation = newLocation
 
-        distance = computeDistance(currentLocation, goalLocation)
-        bearing = computeBearing(currentLocation, goalLocation)
+        distance.value = computeDistance(currentLocation, goalLocation)
+        bearing.value = computeBearing(currentLocation, goalLocation)
     }
 
 
@@ -430,11 +536,11 @@ class NavigationActivity : ComponentActivity(), SensorEventListener {
     }
 
 
+
     // Per fare refresh dei composable
     fun manualRecompose() {
         recomposeToggleState.value = !recomposeToggleState.value
     }
-
 
 
     // Per chiedere i permessi del GPS

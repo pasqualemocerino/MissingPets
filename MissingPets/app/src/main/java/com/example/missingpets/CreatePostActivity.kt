@@ -37,6 +37,7 @@ import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.missingpets.ui.theme.MissingPetsTheme
 import com.example.missingpets.ui.theme.Test_Caricamento_AnnuncioTheme
 import kotlinx.coroutines.CoroutineScope
@@ -44,6 +45,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import okhttp3.internal.wait
 import org.osmdroid.util.GeoPoint
 import java.io.File
 import java.util.Dictionary
@@ -217,19 +219,12 @@ class CreatePostActivity : ComponentActivity() {
                             val res = PostsHandler.createPost(user_id, petName, pet_type, date, position, description, getPath(photoURI))
                             Log.d("Server response", res.toString())
                             // TODO: gestire errore server in base al valore di res
+
+                            //Toast.makeText(this@CreatePostActivity, res, Toast.LENGTH_LONG).show()
                         }
                         finish()
                     }
 
-                    /*
-                    // Crea nuovo post (da sostituire con una cosa non-blocking che mostra una schermata di caricamento)
-                    runBlocking{
-                        val res = postsHandler.createPost(user_id, petName, pet_type, date, position, description, getPath(photoURI))
-                    }
-                    // Ritorna alla pagina con tutti i post
-                    //startActivity(Intent(this@CreatePostActivity, SeePostsActivity::class.java))
-                    finish()
-                    */
                 }
             }) {
                 Text("Create Post")
@@ -274,32 +269,6 @@ class CreatePostActivity : ComponentActivity() {
 
 
 
-    private val READ_STORAGE_PERMISSION_REQUEST_CODE = 41
-    fun checkPermissionToReadExternalStorage(): Boolean {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val result: Int = this.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-            return result == PackageManager.PERMISSION_GRANTED
-        }
-        return false
-    }
-
-    @Throws(Exception::class)
-    fun requestPermissionToReadExternalStorage() {
-        try {
-            ActivityCompat.requestPermissions(
-                (this as Activity?)!!, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                READ_STORAGE_PERMISSION_REQUEST_CODE
-            )
-            Log.d("REQUESTING PERMISSION", "aaa")
-        } catch (e: Exception) {
-            Log.d("ERRORE PERMESSI", ":(((")
-            e.printStackTrace()
-            throw e
-        }
-    }
-
-
-
     @Composable
     fun PhotoField(showPhotoError: MutableState<Boolean>) {
         var text by remember { mutableStateOf("") }
@@ -316,8 +285,11 @@ class CreatePostActivity : ComponentActivity() {
                 )
                 val pickImg = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
                 Button(onClick = {
-                    if (!checkPermissionToReadExternalStorage())
-                        requestPermissionToReadExternalStorage()
+
+                    if (!checkStoragePermission()) {       // chiedi permessi storage
+                        requestStoragePermission()
+                    }
+
                     changeImage.launch(pickImg)
 
                     showPhotoError.value = false     // nascondi messaggio di errore
@@ -465,6 +437,11 @@ class CreatePostActivity : ComponentActivity() {
 
                 // Pulsante per aprire la mappa
                 Button(onClick = {
+
+                    if (!checkGPSPermission()) {       // chiedi permessi GPS
+                        requestGPSPermission()
+                    }
+
                     dialogState.value = true
                 }) {
                     Text(
@@ -496,9 +473,6 @@ class CreatePostActivity : ComponentActivity() {
                     confirmButton = {
                         Button(
                             onClick = {
-                                // Richiedi i permessi per la posizione
-                                requestLocationPermissions()
-
                                 // passagli l'ultima posizione come startLocation
                                 mapSelectorDialog.startLocation = mapSelectorDialog.getPosition().clone()
 
@@ -615,39 +589,30 @@ class CreatePostActivity : ComponentActivity() {
     }
 
 
-    fun requestLocationPermissions() {
-        if (ActivityCompat.checkSelfPermission(this.getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-            ActivityCompat.requestPermissions(this, arrayOf( android.Manifest.permission.ACCESS_FINE_LOCATION), 1);
-
-        } else{
-            //   getLocationfromYourDevice();
-        }
+    // Per chiedere i permessi dello storage
+    private fun checkStoragePermission(): Boolean {
+        val result = ContextCompat.checkSelfPermission(applicationContext, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+        val result1 = ContextCompat.checkSelfPermission(applicationContext, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        val result2 = ContextCompat.checkSelfPermission(applicationContext, android.Manifest.permission.READ_MEDIA_IMAGES)
+        return (result == PackageManager.PERMISSION_GRANTED) && (result1 == PackageManager.PERMISSION_GRANTED) && (result2 == PackageManager.PERMISSION_GRANTED)
+    }
+    private fun requestStoragePermission() {
+        ActivityCompat.requestPermissions(this, arrayOf(
+            android.Manifest.permission.READ_EXTERNAL_STORAGE,
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            android.Manifest.permission.READ_MEDIA_IMAGES
+        ), 1)
     }
 
 
-
-    private fun isLocationPermissionGranted(): Boolean {
-        return if (ActivityCompat.checkSelfPermission(
-                this,
-                android.Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this,
-                android.Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(
-                    android.Manifest.permission.ACCESS_FINE_LOCATION,
-                    android.Manifest.permission.ACCESS_COARSE_LOCATION
-                ),
-                1
-            )
-            false
-        } else {
-            true
-        }
+    // Per chiedere i permessi del GPS
+    private fun checkGPSPermission(): Boolean {
+        val result = ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+        val result1 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
+        return result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED
     }
-
+    private fun requestGPSPermission() {
+        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION), 1)
+    }
 }

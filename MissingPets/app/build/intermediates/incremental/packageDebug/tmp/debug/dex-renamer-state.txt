@@ -1,4 +1,4 @@
-#Tue Feb 06 15:10:57 CET 2024
+#Thu Feb 08 23:59:37 CET 2024
 base.0=C\:\\Users\\Anna\\Documents\\GitHub\\MissingPets\\MissingPets\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=C\:\\Users\\Anna\\Documents\\GitHub\\MissingPets\\MissingPets\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.2=C\:\\Users\\Anna\\Documents\\GitHub\\MissingPets\\MissingPets\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\15\\classes.dex

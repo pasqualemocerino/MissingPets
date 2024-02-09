@@ -1997,6 +1997,7 @@ int id bubble_moreinfo 0x7f08005e
 int id bubble_subdescription 0x7f08005f
 int id bubble_title 0x7f080060
 int id buttonPanel 0x7f080061
+int id camera_button 0x7f0801d3
 int id cancel_button 0x7f080062
 int id center 0x7f080063
 int id center_horizontal 0x7f080064
@@ -2013,6 +2014,7 @@ int id chip_group 0x7f08006e
 int id chronometer 0x7f08006f
 int id circle_center 0x7f080070
 int id clear_text 0x7f080071
+int id click_image 0x7f0801d4
 int id clip_horizontal 0x7f080072
 int id clip_vertical 0x7f080073
 int id clockwise 0x7f080074
@@ -2453,6 +2455,7 @@ int layout design_navigation_menu_item 0x7f0b002a
 int layout design_text_input_end_icon 0x7f0b002b
 int layout design_text_input_start_icon 0x7f0b002c
 int layout dynamic_feature_install_fragment 0x7f0b002d
+int layout layout_camera 0x7f0b0073
 int layout layout_map 0x7f0b002e
 int layout material_chip_input_combo 0x7f0b002f
 int layout material_clock_display 0x7f0b0030
@@ -2743,6 +2746,7 @@ int style Animation_AppCompat_DropDownUp 0x7f100004
 int style Animation_AppCompat_Tooltip 0x7f100005
 int style Animation_Design_BottomSheetDialog 0x7f100006
 int style Animation_MaterialComponents_BottomSheetDialog 0x7f100007
+int style AppTheme 0x7f1002d6
 int style Base_AlertDialog_AppCompat 0x7f100008
 int style Base_AlertDialog_AppCompat_Light 0x7f100009
 int style Base_Animation_AppCompat_Dialog 0x7f10000a

@@ -27,6 +27,10 @@ class ServerAPI {
         @POST("/posts")
         suspend fun postsPost(@Part("data") data: RequestBody, @Part image: MultipartBody.Part): String
 
+        @Multipart
+        @POST("/match")
+        suspend fun matchPost(@Part("user_id") user_id: RequestBody, @Part("date") date: RequestBody, @Part("position") position: RequestBody, @Part image: MultipartBody.Part): JsonArray
+
         /*
         @GET("/photo")
         suspend fun photoGet(@Query("post_id") post_id: Int): Image

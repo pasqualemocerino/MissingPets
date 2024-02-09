@@ -2,6 +2,7 @@ package com.example.missingpets
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Looper
 import android.preference.PreferenceManager
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
@@ -262,9 +264,10 @@ class MapSelectorDialog {
     }
 
     fun getPositionAsString(): String {
-        // Tagliamo le coordinate a 8 cifre decimali per evitare problemi nel server
-        var lat = "%.8f".format(Locale.ENGLISH, startPoint.latitude)
-        var lon = "%.8f".format(Locale.ENGLISH, startPoint.longitude)
+        // Tagliamo le coordinate a 6 cifre decimali per evitare problemi nel server
+        // (6 cifre decimali corrispondono ad una precisione di 1 metro)
+        var lat = "%.6f".format(Locale.ENGLISH, startPoint.latitude)
+        var lon = "%.6f".format(Locale.ENGLISH, startPoint.longitude)
         val str = lat + "," + lon
         //Log.d("coordinate", str)
         return str
