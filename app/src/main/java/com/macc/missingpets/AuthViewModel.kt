@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 class AuthViewModel : ViewModel() {
 
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
-    public var isAuthenticated by mutableStateOf(false)
+    var isAuthenticated by mutableStateOf(false)
 
     init {
         viewModelScope.launch {
@@ -28,8 +28,8 @@ class AuthViewModel : ViewModel() {
         return auth.currentUser
     }
 
-    fun userId(): String? {
-        return auth.currentUser?.uid
+    fun userId(): String {
+        return auth.currentUser?.uid.toString()
     }
 
     fun signIn(email: String, password: String) {

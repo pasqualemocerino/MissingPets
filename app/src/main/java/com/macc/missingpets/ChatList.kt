@@ -1,6 +1,9 @@
 package com.macc.missingpets
 
+import android.os.Build
 import android.util.Log
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -27,6 +30,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,48 +43,61 @@ import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-
-fun formatTime(timestamp: Date): String {
+/*fun formatTime(mysqlDateTime: String): String {
+    // Define the MySQL datetime format
+    val mysqlDateTimeFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
     val sdf = SimpleDateFormat("hh:mm a", Locale.getDefault())
+
+    // Parse the MySQL datetime string into a Date object
+    var ret = ""
+    val date = mysqlDateTimeFormat.parse(mysqlDateTime)
+    if (date != null) ret = sdf.format(date)
+
+    return ret
+}
+ */
+
+// TODO: Date display format
+fun formatTime(mysqlDateTime: String): String {
+    return mysqlDateTime
+}
+
+fun formatDateTime(timestamp: Date): String {
+    val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
     return sdf.format(timestamp)
 }
 
-// On a separate thread, to filter chats relative to the user from the entire set of chats
-fun getUserChatList(auth: AuthViewModel, chatList: List<Chat>): MutableList<Chat> {
-    val firebaseUser = auth.currentUser()
-    val userId = firebaseUser?.uid
-
-    val userChatList = mutableListOf<Chat>()
-
-    // Scan all messages ordered by timestamps in descending order
-    for (chat in chatList) {
-        // Select only the chats relative to the user (as sender or receiver)
-        if (chat.lastSenderId == userId ||
-            chat.lastReceiverId == userId) {
-            userChatList.add(chat)
-        }
-    }
-    return userChatList
-}
-
-fun readMessages(senderId: String, receiverId: String, completeMessageList: MutableList<ChatMessage>) {
-    // For all unread messages such directed to me, change to read
-    for (i in completeMessageList.indices) {
-        val message = completeMessageList[i]
-        if (message.senderId == senderId && message.receiverId == receiverId && message.unread) {
-            completeMessageList[i].unread = false
-        }
-    }
-}
-
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ChatsScreen(auth: AuthViewModel, completeMessageList: MutableList<ChatMessage>, completeChatList:MutableList<Chat>, navController: NavController) {
-    val userChatList = getUserChatList(auth, completeChatList)
+fun ChatsScreen(auth: AuthViewModel, navController: NavController) {
+    // Select only the chats related to the user
+    var userChatList by remember { mutableStateOf<List<Chat>>(emptyList()) }
+    val userId = auth.currentUser()?.uid.toString()
+
+    // Get all chats from the server
+    LaunchedEffect(Unit) {
+        withContext(Dispatchers.IO) {
+            CoroutineScope(Dispatchers.IO).launch {
+                runBlocking {
+                    userChatList = ChatHandler.getChatList(userId)
+                    Log.d("Server response", "getChatList() executed")
+                }
+                // loading.value = false
+                Log.d("DONE", "Chats fetched from server")
+            }
+        }
+    }
+
     Column {
         TopAppBar(
             title = {
@@ -92,22 +113,42 @@ fun ChatsScreen(auth: AuthViewModel, completeMessageList: MutableList<ChatMessag
                 )
             }
         )
-        ChatList(auth = auth, chats = userChatList) { chatNameId, chatName ->
+        ChatList(auth = auth, chats = userChatList) { chatId, chatNameId, chatName ->
             // Read all unread messages on chat opening
-            val user = auth.currentUser()?.uid
-            if (user != null) {
-                readMessages(chatNameId, user, completeMessageList)
-                // Redirect to a specific chat on click
-                navController.navigate(Routes.CHAT + "/$chatNameId" + "/$chatName")
+            val userId = auth.currentUser()?.uid.toString()
+
+            // Register the reading of the chat on the server
+
+            // Chat structure only needed to update the unread parameter of chatId with lastReceiverId equal to userId
+            val chat = Chat(
+                id = chatId,
+                lastSenderId = "",
+                lastSenderUsername = "",
+                lastReceiverId = userId,
+                lastReceiverUsername = "",
+                lastMessage = "",
+                timestamp = "",
+                unread = false
+            )
+
+            runBlocking {
+                try {
+                    val res = ChatHandler.createOrUpdateChat(chat)
+                    Log.d("Server response", res.toString())
+                } catch (e: Exception) {
+                    Log.e("ChatsScreen", "Error reading the chat: ${e.message}")
+                }
             }
-            else Log.e("ChatsScreen", "user is null")
+
+            // Redirect to a specific chat on click
+            navController.navigate(Routes.CHAT + "/$chatId" + "/$chatNameId" + "/$chatName")
         }
     }
 
 }
 
 @Composable
-fun ChatList(auth: AuthViewModel, chats: List<Chat>, onItemClick: (String, String) -> Unit) {
+fun ChatList(auth: AuthViewModel, chats: List<Chat>, onItemClick: (Int, String, String) -> Unit) {
     LazyColumn {
         itemsIndexed(chats) { index, chat ->
             if (index > 0) {
@@ -125,9 +166,10 @@ fun ChatList(auth: AuthViewModel, chats: List<Chat>, onItemClick: (String, Strin
 }
 
 @Composable
-fun ChatItem(auth:AuthViewModel, chat: Chat, onItemClick: (String, String) -> Unit) {
+fun ChatItem(auth:AuthViewModel, chat: Chat, onItemClick: (Int, String, String) -> Unit) {
     val userId = auth.currentUser()?.uid
 
+    val chatId = chat.id
     val chatNameId = if (userId != chat.lastSenderId) { chat.lastSenderId }
     else { chat.lastReceiverId }
 
@@ -137,7 +179,7 @@ fun ChatItem(auth:AuthViewModel, chat: Chat, onItemClick: (String, String) -> Un
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onItemClick(chatNameId, chatName) }
+            .clickable { onItemClick(chatId, chatNameId, chatName) }
             .padding(16.dp)
     ) {
         // Profile Image
@@ -178,7 +220,7 @@ fun ChatItem(auth:AuthViewModel, chat: Chat, onItemClick: (String, String) -> Un
                 ) {
                     // Icon(imageVector = Icons.Default.MailOutline, contentDescription = null)
                     Text(
-                        text = formatTime(chat.timestamp),
+                        text = "", // formatTime(chat.timestamp),
                         color = MaterialTheme.colorScheme.onSurface.copy()
                     )
                 }
@@ -194,7 +236,7 @@ fun ChatItem(auth:AuthViewModel, chat: Chat, onItemClick: (String, String) -> Un
                 ) {
                     // Icon(imageVector = Icons.Default.MailOutline, contentDescription = null)
                     Text(
-                        text = formatTime(chat.timestamp),
+                        text = "", // formatTime(chat.timestamp),
                         color = MaterialTheme.colorScheme.onSurface.copy()
                     )
                 }

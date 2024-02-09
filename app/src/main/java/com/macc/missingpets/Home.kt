@@ -38,6 +38,11 @@ fun HomeScreen(auth: AuthViewModel, navController: NavController) {
             Text("Chat list")
         }
         Button(onClick = {
+            navController.navigate(Routes.CHAT + "/0" + "/ux0P38UTrdNgy6usK2OEZbrG7x32" + "/Chiara")
+        }) {
+            Text("New chat with Chiara")
+        }
+        Button(onClick = {
             // Handle log out logic
             auth.signOut()
             if (user != null) {

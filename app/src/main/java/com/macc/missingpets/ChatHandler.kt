@@ -1,26 +1,14 @@
 package com.macc.missingpets
-/*
-import android.media.Image
-import android.net.Uri
+
 import android.os.Build
-import android.os.Environment
-import android.provider.MediaStore
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
-import com.example.missingpets.ServerAPI
-import com.google.gson.Gson
-import com.google.gson.stream.JsonReader
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import okhttp3.RequestBody.*
-import java.io.File
+import com.google.gson.Gson
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
-*/
-import java.util.Date
 
 data class ChatMessage(
     val id: Int,
@@ -29,8 +17,7 @@ data class ChatMessage(
     val receiverId: String,
     val receiverUsername: String,
     val message: String,
-    val timestamp: Date,
-    var unread: Boolean
+    val timestamp: String
 )
 
 // List of all chats, unique entry for a specific pair of users
@@ -41,82 +28,72 @@ data class Chat(
     var lastReceiverId: String,
     var lastReceiverUsername: String,
     var lastMessage: String,
-    var timestamp: Date,
+    var timestamp: String,
     var unread: Boolean
 )
 
 
-/*
 // Singleton object
 object ChatHandler : ViewModel() {
 
-    /*
-    private var chatList:MutableList<Chat> = mutableListOf(
-        Chat("0", "ux0P38UTrdNgy6usK2OEZbrG7x32", "Chiara", "4qQUbahchPT9oqT0VY1PRvvwSu92", "Pasquale","Ciao", System.currentTimeMillis() + 1, false)
-    )
-
-    private var messageList:MutableList<ChatMessage> = mutableListOf(
-        ChatMessage("0", "4qQUbahchPT9oqT0VY1PRvvwSu92", "Pasquale", "ux0P38UTrdNgy6usK2OEZbrG7x32", "Chiara", "Ciao Chiara", System.currentTimeMillis(), false),
-        ChatMessage("1", "ux0P38UTrdNgy6usK2OEZbrG7x32", "Chiara", "4qQUbahchPT9oqT0VY1PRvvwSu92", "Pasquale", "Ciao", System.currentTimeMillis() + 1, false)
-    )
-    */
-
-    private lateinit var  messageList:ArrayList<ChatMessage>
-    private lateinit var  chatList:ArrayList<Chat>
+    private lateinit var messageList:ArrayList<ChatMessage>
+    private lateinit var chatList:ArrayList<Chat>
     private var retrofit = ServerAPI.HelperClass.getInstance()
 
     // Latest date of server request
     private lateinit var lastServerRequestDate : LocalDateTime
 
     // Update rate (seconds between updates)
-    private val secondsBetweenUpdates = 5
+    private const val secondsBetweenUpdates = 1
 
 
     @RequiresApi(Build.VERSION_CODES.O)
-    suspend fun getMessageList(): ArrayList<ChatMessage> {
+    suspend fun getMessageList(userId: String, chatNameId: String): ArrayList<ChatMessage> {
         if (this::messageList.isInitialized && this::lastServerRequestDate.isInitialized) {
 
             // Compute the seconds elapsed until last request
             val seconds = lastServerRequestDate.until( LocalDateTime.now(), ChronoUnit.SECONDS )
 
             // Check if more seconds than update rate elapsed
-            if (seconds >= secondsBetweenUpdates) {
-                return getMessageListFromServer()
+            return if (seconds >= secondsBetweenUpdates) {
+                getMessageListFromServer(userId, chatNameId)
             }
             // Otherwise return the previously computed list
             else {
-                return messageList
+                messageList
             }
         }
         else {
-            return getMessageListFromServer()
+            return getMessageListFromServer(userId, chatNameId)
         }
     }
 
-    suspend fun getChatList(): ArrayList<Chat> {
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun getChatList(userId: String): ArrayList<Chat> {
         if (this::chatList.isInitialized && this::lastServerRequestDate.isInitialized) {
 
             // Compute the seconds elapsed until last request
             val seconds = lastServerRequestDate.until( LocalDateTime.now(), ChronoUnit.SECONDS )
 
             // Check if more seconds than update rate elapsed
-            if (seconds >= secondsBetweenUpdates) {
-                return getChatListFromServer()
+            return if (seconds >= secondsBetweenUpdates) {
+                getChatListFromServer(userId)
             }
             // Otherwise return the previously computed list
             else {
-                return chatList
+                chatList
             }
         }
         else {
-            return getChatListFromServer()
+            return getChatListFromServer(userId)
         }
     }
 
 
-    suspend fun getMessageListFromServer(): ArrayList<ChatMessage> {
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun getMessageListFromServer(userId: String, chatNameId: String): ArrayList<ChatMessage> {
 
-        Log.d("POST", "Requesting messages from server")
+        Log.d("getMessageListFromServer", "Requesting messages from server")
 
         // Record the date of last server request
         lastServerRequestDate = LocalDateTime.now()
@@ -125,12 +102,12 @@ object ChatHandler : ViewModel() {
         messageList = ArrayList<ChatMessage>()
 
         try {
-            val json = retrofit.messagesGet()
+            val json = retrofit.messagesGet(userId, chatNameId)
 
             // Iteration on all messages
             for (obj in json) {
                 val message = obj.asJsonArray
-                messageList.add(ChatMessage(message[0].asInt, message[1].asString, message[2].asString, message[3].asString, message[4].asString, message[5].asString, message[6].asString, message[7].asBoolean))
+                messageList.add(ChatMessage(message[0].asInt, message[1].asString, message[2].asString, message[3].asString, message[4].asString, message[5].asString, message[6].asString))
             }
         } catch (e: Exception) {
             // Handle exception
@@ -140,9 +117,10 @@ object ChatHandler : ViewModel() {
         return messageList
     }
 
-    suspend fun getChatListFromServer(): ArrayList<Chat> {
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun getChatListFromServer(userId: String): ArrayList<Chat> {
 
-        Log.d("POST", "Requesting chats from server")
+        Log.d("getChatListFromServer", "Requesting chats from server")
 
         // Record the date of last server request
         lastServerRequestDate = LocalDateTime.now()
@@ -151,12 +129,12 @@ object ChatHandler : ViewModel() {
         chatList = ArrayList<Chat>()
 
         try {
-            val json = retrofit.chatsGet()
+            val json = retrofit.chatsGet(userId)
 
             // Iteration on all chats
             for (obj in json) {
                 val chat = obj.asJsonArray
-                messageList.add(ChatMessage(chat[0].asInt, chat[1].asString, chat[2].asString, chat[3].asString, chat[4].asString, chat[5].asString, chat[6].asString, chat[7].asBoolean))
+                chatList.add(Chat(chat[0].asInt, chat[1].asString, chat[2].asString, chat[3].asString, chat[4].asString, chat[5].asString, chat[6].asString, chat[7].asBoolean))
             }
         } catch (e: Exception) {
             // Handle exception
@@ -166,13 +144,32 @@ object ChatHandler : ViewModel() {
         return chatList
     }
 
-    // When creating a message, it is needed to update also the chat list
-    suspend fun createMessage(senderId: String, senderUsername: String, receiverId: String, receiverUsername: String, message: String, timestamp: Date, unread: Boolean): Int {
+    suspend fun createOrUpdateChat(newChat: Chat): Int {
         var ret = -1
 
-        // Create a message to send (postId will be correctly set by the server)
-        val newMessage = ChatMessage(0, senderId, senderUsername, receiverId, receiverUsername, message, timestamp, unread)
-        val messageToSend = RequestBody.create("application/json".toMediaTypeOrNull(), Gson().toJson(newMessage))
+        // Create a chat to send
+        val chatToSend =
+            Gson().toJson(newChat).toRequestBody("application/json".toMediaTypeOrNull())
+
+        try {
+            // Send PUT request
+            val serverAnswer = retrofit.chatsPut(chatToSend)
+            Log.d("createOrUpdateChat answer", serverAnswer)
+            ret = serverAnswer.toInt()
+        } catch (e: Exception) {
+            // Handle exception
+            Log.e("createOrUpdateChat", "SERVER PUT ERROR: ${e.message}")
+            e.printStackTrace()
+        }
+        return ret
+    }
+
+    suspend fun createMessage(newMessage: ChatMessage): Int {
+        var ret = -1
+
+        // Create a message to send
+        val messageToSend =
+            Gson().toJson(newMessage).toRequestBody("application/json".toMediaTypeOrNull())
 
         try {
             // Send POST request
@@ -181,11 +178,10 @@ object ChatHandler : ViewModel() {
             ret = serverAnswer.toInt()
         } catch (e: Exception) {
             // Handle exception
-            Log.d("createMessage", "SERVER POST ERROR")
-            e.printStackTrace()
+            Log.e("createMessage", "Exception during server request", e)
         }
+
         return ret
     }
 
 }
- */

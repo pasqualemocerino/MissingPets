@@ -1,6 +1,9 @@
 package com.macc.missingpets
 
+import android.os.Build
 import android.util.Log
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -25,6 +28,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,43 +37,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import java.util.Date
-import java.util.Locale
-
-
-/*
-CoroutineScope(Dispatchers.IO).launch {
-                        runBlocking {
-                            val res = PostsHandler.createPost(user_id, petName, pet_type, date, position, description, getPath(photoURI))
-                            Log.d("Server response", res.toString())
-                            // TODO: gestire errore server in base al valore di res
-                        }
-                        finish()
-                    }
- */
-// On a separate thread, to get chat messages list to display from the entire set of messages
-fun getChatMessageList(auth: AuthViewModel, chatNameId: String, completeChatMessageList: List<ChatMessage>): List<ChatMessage> {
-    val userId = auth.currentUser()?.uid
-    val chatMessageList = mutableListOf<ChatMessage>()
-
-    // Scan all messages ordered by timestamps in descending order
-    for (chatMessage in completeChatMessageList) {
-        // Select only messages between user and chatName user
-        if (userId != null && (
-                    (chatMessage.receiverId == userId && chatMessage.senderId == chatNameId) ||
-                    (chatMessage.receiverId == chatNameId && chatMessage.senderId == userId)
-                )
-            ) {
-                chatMessageList.add(chatMessage)
-        }
-    }
-
-    return chatMessageList
-
-}
 
 @Composable
 fun ChatMessageItem(message: ChatMessage, sending: Boolean) {
@@ -142,46 +119,32 @@ fun ChatTextInputBar(
     }
 }
 
-fun updateChat(chatMessage: ChatMessage, chatList: MutableList<Chat>) {
-    for (i in chatList.indices) {
-        val chat = chatList[i]
-        var updateFields = false
-        if (chat.lastSenderId == chatMessage.senderId && chat.lastReceiverId == chatMessage.receiverId) { updateFields = true }
-        if (chat.lastSenderId == chatMessage.receiverId && chat.lastReceiverId == chatMessage.senderId) {
-            val newReceiverId = chatList[i].lastSenderId
-            val newReceiverUsername = chatList[i].lastSenderUsername
-            chatList[i].lastSenderId = chatList[i].lastReceiverId
-            chatList[i].lastSenderUsername = chatList[i].lastReceiverUsername
-            chatList[i].lastReceiverId = newReceiverId
-            chatList[i].lastReceiverUsername = newReceiverUsername
-            updateFields = true
-        }
-        if (updateFields) {
-            chatList[i].lastMessage = chatMessage.message
-            chatList[i].timestamp = chatMessage.timestamp
-            chatList[i].unread = chatMessage.unread
-        }
-    }
-}
-
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ChatScreen(auth: AuthViewModel, chatNameId: String, chatName: String, completeChatMessageList: MutableList<ChatMessage>, chatList: MutableList<Chat>, navController: NavController) {
-    val firebaseUser = auth.currentUser()
-    val senderId = firebaseUser?.uid
-    if (senderId == null) {
-        Log.e("ChatScreen", "senderId is null")
-        return
-    }
-    val senderUsername = firebaseUser.displayName
-    if (senderUsername == null) {
-        Log.e("ChatScreen", "senderUsername is null")
-        return
-    }
+fun ChatScreen(auth: AuthViewModel, chatId: Int, chatNameId: String, chatName: String, navController: NavController) {
+    val senderId = auth.userId()
+    val senderUsername = auth.currentUser()?.displayName.toString()
 
+    val context = LocalContext.current
     var newMessage by remember { mutableStateOf("") }
     var chatMessages by remember { mutableStateOf(listOf<ChatMessage>()) }
-    chatMessages = getChatMessageList(auth, chatNameId, completeChatMessageList)
+
+
+    LaunchedEffect(Unit) {
+        withContext(Dispatchers.IO) {
+             CoroutineScope(Dispatchers.IO).launch {
+                runBlocking {
+                    chatMessages = ChatHandler.getMessageList(senderId, chatNameId)
+                    Log.d("Server response", "getMessageList() executed")
+                    Log.d("Messages downloaded", chatMessages.toString())
+                }
+                Log.d("DONE", "Messages fetched from server")
+            }
+        }
+    }
+
+    // chatMessages = getChatMessageList(auth, chatNameId, completeChatMessageList)
 
     Column(
         modifier = Modifier
@@ -221,20 +184,56 @@ fun ChatScreen(auth: AuthViewModel, chatNameId: String, chatName: String, comple
             onValueChange = { newMessage = it },
             onSendClick = {
                 if (newMessage.isNotBlank()) {
+                    val timestamp = formatDateTime(Date(System.currentTimeMillis()))
                     val chatMessage = ChatMessage(
-                        id = 0, // Locale.getDefault().toString()), // Timestamp-based id
+                        id = 0,         // Set by server
                         senderId = senderId,
                         senderUsername = senderUsername,
                         receiverId = chatNameId,
                         receiverUsername = chatName,
                         message = newMessage,
-                        timestamp = Date(System.currentTimeMillis()),
+                        timestamp = timestamp //"2023-06-15"
+                    )
+
+                    // For a rapid visualization, to remove
+                    //chatMessages += chatMessage
+
+                    val chat = Chat(
+                        id = chatId,
+                        lastSenderId = senderId,
+                        lastSenderUsername = senderUsername,
+                        lastReceiverId = chatNameId,
+                        lastReceiverUsername = chatName,
+                        lastMessage = newMessage,
+                        timestamp = timestamp,
                         unread = true
                     )
-                    //chatMessages += chatMessage
-                    completeChatMessageList += chatMessage
-                    // Chat update
-                    updateChat(chatMessage, chatList)
+
+                    // Add message on server completeChatMessageList += chatMessage
+                    //CoroutineScope(Dispatchers.IO).launch {
+                    runBlocking {
+                        try {
+                            val res = ChatHandler.createMessage(chatMessage)
+                            Log.d("Server response", res.toString())
+                        } catch (e: Exception) {
+                            Toast.makeText(
+                                context,
+                                "CREATE MESSAGE ERROR, ${e.message}",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            Log.e("ChatScreen", "Error sending message: ${e.message}")
+                        }
+
+                        // Chat creation or update
+                        try {
+                            val res = ChatHandler.createOrUpdateChat(chat)
+                            Log.d("Server response", res.toString())
+                        } catch (e: Exception) {
+                            Log.e("ChatScreen", "Error creating or updating chat: ${e.message}")
+                        }
+                    }
+                    // }
+
                     newMessage = ""
                 }
             }
