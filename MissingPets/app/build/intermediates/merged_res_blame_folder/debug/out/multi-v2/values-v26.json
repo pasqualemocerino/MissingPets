@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.missingpets.app-mergeDebugResources-83:/values-v26/values-v26.xml",
+            "outputFile": "com.example.missingpets.app-mergeDebugResources-89:/values-v26/values-v26.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Anna\\.gradle\\caches\\transforms-3\\527dae1ae0a8e438a6654c37e7552e99\\transformed\\appcompat-1.6.1\\res\\values-v26\\values-v26.xml",
+                    "source": "C:\\Users\\Anna\\.gradle\\caches\\transforms-3\\1a8715703593fd1f7e052e2957a46c9e\\transformed\\appcompat-1.6.1\\res\\values-v26\\values-v26.xml",
                     "from": {
                         "startLines": "2,3,4,8,12,16",
                         "startColumns": "4,4,4,4,4,4",

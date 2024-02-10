@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.missingpets.app-mergeDebugResources-83:/values-w480dp-port-v13/values-w480dp-port-v13.xml",
+            "outputFile": "com.example.missingpets.app-mergeDebugResources-89:/values-w480dp-port-v13/values-w480dp-port-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Anna\\.gradle\\caches\\transforms-3\\81c93e8e2c7a12327f00c63106acdbff\\transformed\\material-1.4.0-beta01\\res\\values-w480dp-port-v13\\values-w480dp-port-v13.xml",
+                    "source": "C:\\Users\\Anna\\.gradle\\caches\\transforms-3\\8ec5507036ed53da4c8fa63170583394\\transformed\\material-1.4.0-beta01\\res\\values-w480dp-port-v13\\values-w480dp-port-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",

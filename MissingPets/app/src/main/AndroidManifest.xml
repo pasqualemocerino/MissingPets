@@ -38,6 +38,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".AppActivity">
+        </activity>
+
         <activity android:name=".CameraActivity">
         </activity>
 

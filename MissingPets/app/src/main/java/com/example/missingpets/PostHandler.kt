@@ -22,7 +22,7 @@ import java.util.UUID
 
 data class Post(
     var post_id: Int,
-    var user_id: Int,
+    var user_id: String,
     var pet_name: String,
     var pet_type: String,
     var date: String,
@@ -86,7 +86,7 @@ object PostsHandler : ViewModel() {            // 'object' e' un Singleton
             // itero su tutti i post
             for (obj in json) {
                 val post = obj.asJsonArray
-                postsList.add(Post(post[0].asInt, post[1].asInt, post[2].asString, post[3].asString, post[4].asString, post[5].asString, post[6].asString, post[7].asString))
+                postsList.add(Post(post[0].asInt, post[1].asString, post[2].asString, post[3].asString, post[4].asString, post[5].asString, post[6].asString, post[7].asString))
             }
         } catch (e: Exception) {
             // handle exception
@@ -97,7 +97,7 @@ object PostsHandler : ViewModel() {            // 'object' e' un Singleton
     }
 
 
-    suspend fun createPost(user_id:Int, petName:String, pet_type:String, date:String, position:String, description:String, photoPath:String): String {
+    suspend fun createPost(user_id:String, petName:String, pet_type:String, date:String, position:String, description:String, photoPath:String): String {
         var res = "ok"
 
         // Prepara post per l'invio (post_id e address hanno valori qualunque tanto vengono impostati bene dal server)
@@ -150,7 +150,7 @@ object PostsHandler : ViewModel() {            // 'object' e' un Singleton
             // itero su tutti i post
             for (obj in json) {
                 val post = obj.asJsonArray
-                matchingPostsList.add(Post(post[0].asInt, post[1].asInt, post[2].asString, post[3].asString, post[4].asString, post[5].asString, post[6].asString, post[7].asString))
+                matchingPostsList.add(Post(post[0].asInt, post[1].asString, post[2].asString, post[3].asString, post[4].asString, post[5].asString, post[6].asString, post[7].asString))
             }
         } catch (e: Exception) {
             // handle exception
@@ -159,6 +159,24 @@ object PostsHandler : ViewModel() {            // 'object' e' un Singleton
             return -1
         }
         return 0
+    }
+
+    suspend fun getUserPostList(user_id: String): ArrayList<Post> {
+        var userPostsList = ArrayList<Post>()
+        try {
+            val json = retrofit.userpostsGet(user_id)
+
+            // itero su tutti i post
+            for (obj in json) {
+                val post = obj.asJsonArray
+                userPostsList.add(Post(post[0].asInt, post[1].asString, post[2].asString, post[3].asString, post[4].asString, post[5].asString, post[6].asString, post[7].asString))
+            }
+        } catch (e: Exception) {
+            // handle exception
+            Log.d("ERRORE SERVER USER POSTS", ":(")
+            e.printStackTrace()
+        }
+        return userPostsList
     }
 
 

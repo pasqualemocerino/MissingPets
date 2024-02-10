@@ -71,13 +71,13 @@ fun HomeScreen(navController: NavController) {
         }
 
         // Lista dei post o schermata di caricamento, a seconda del valore di loading
-        PostsListOrLoading(loading)
+        PostsListOrLoading(loading, navController)
     }
 }
 
 
 @Composable
-fun PostsListOrLoading(loading:MutableState<Boolean>) {
+fun PostsListOrLoading(loading:MutableState<Boolean>, navController: NavController) {
 
     // misure dello schermo, per disegnare bene gli elementi
     val context = LocalContext.current
@@ -113,13 +113,13 @@ fun PostsListOrLoading(loading:MutableState<Boolean>) {
     ) {
         // aggiungi un elemento per ogni post
         for (i:Post in postsList) {
-            PostElement(i)
+            PostElement(i, navController)
         }
     }
 }
 
 @Composable
-fun PostElement(post: Post) {
+fun PostElement(post: Post, navController: NavController) {
 
     // misure dello schermo, per disegnare bene gli elementi
     val context = LocalContext.current
@@ -173,9 +173,20 @@ fun PostElement(post: Post) {
                 text = "User: " + post.user_id
             )
             NavigationButton(post.position, post.address)
+
+            ChatButton(navController, post.user_id, "persona")
         }
     }
 
+}
+
+@Composable
+fun ChatButton(navController:NavController, post_user_id:String, post_username:String) {
+    Button(onClick = {
+        navController.navigate(Routes.CHAT + "/0" + "/" + post_user_id + "/" + post_username)
+    }) {
+        Text("Chat")
+    }
 }
 
 @Composable

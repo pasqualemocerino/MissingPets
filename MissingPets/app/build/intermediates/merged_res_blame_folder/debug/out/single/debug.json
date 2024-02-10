@@ -1,90 +1,86 @@
 [
     {
-        "merged": "com.example.missingpets.app-merged_res-85:/layout_layout_camera.xml.flat",
-        "source": "com.example.missingpets.app-main-87:/layout/layout_camera.xml"
+        "merged": "com.example.missingpets.app-merged_res-91:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.missingpets.app-main-93:/mipmap-mdpi/ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-merged_res-85:\\xml_data_extraction_rules.xml.flat",
-        "source": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-main-87:\\xml\\data_extraction_rules.xml"
+        "merged": "com.example.missingpets.app-merged_res-91:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.missingpets.app-main-93:/mipmap-xxxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-merged_res-85:\\mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-main-87:\\mipmap-xhdpi\\ic_launcher.webp"
+        "merged": "com.example.missingpets.app-merged_res-91:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.missingpets.app-main-93:/mipmap-mdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-merged_res-85:\\drawable_logo.png.flat",
-        "source": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-main-87:\\drawable\\logo.png"
+        "merged": "com.example.missingpets.app-merged_res-91:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.missingpets.app-main-93:/mipmap-xhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-merged_res-85:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-main-87:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+        "merged": "com.example.missingpets.app-merged_res-91:/mipmap-anydpi_ic_launcher.xml.flat",
+        "source": "com.example.missingpets.app-main-93:/mipmap-anydpi/ic_launcher.xml"
     },
     {
-        "merged": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-merged_res-85:\\mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-main-87:\\mipmap-mdpi\\ic_launcher_round.webp"
+        "merged": "com.example.missingpets.app-merged_res-91:/layout_layout_map.xml.flat",
+        "source": "com.example.missingpets.app-main-93:/layout/layout_map.xml"
     },
     {
-        "merged": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-merged_res-85:\\mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-main-87:\\mipmap-hdpi\\ic_launcher.webp"
+        "merged": "com.example.missingpets.app-merged_res-91:/drawable_logo.png.flat",
+        "source": "com.example.missingpets.app-main-93:/drawable/logo.png"
     },
     {
-        "merged": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-merged_res-85:\\xml_backup_rules.xml.flat",
-        "source": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-main-87:\\xml\\backup_rules.xml"
+        "merged": "com.example.missingpets.app-merged_res-91:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.example.missingpets.app-main-93:/drawable/ic_launcher_foreground.xml"
     },
     {
-        "merged": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-merged_res-85:\\drawable_ic_launcher_foreground.xml.flat",
-        "source": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-main-87:\\drawable\\ic_launcher_foreground.xml"
+        "merged": "com.example.missingpets.app-merged_res-91:/layout_layout_camera.xml.flat",
+        "source": "com.example.missingpets.app-main-93:/layout/layout_camera.xml"
     },
     {
-        "merged": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-merged_res-85:\\drawable_ic_position.xml.flat",
-        "source": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-main-87:\\drawable\\ic_position.xml"
+        "merged": "com.example.missingpets.app-merged_res-91:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.missingpets.app-main-93:/mipmap-hdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-merged_res-85:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-main-87:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+        "merged": "com.example.missingpets.app-merged_res-91:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.missingpets.app-main-93:/drawable/ic_launcher_background.xml"
     },
     {
-        "merged": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-merged_res-85:\\drawable_ic_launcher_background.xml.flat",
-        "source": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-main-87:\\drawable\\ic_launcher_background.xml"
+        "merged": "com.example.missingpets.app-merged_res-91:/xml_backup_rules.xml.flat",
+        "source": "com.example.missingpets.app-main-93:/xml/backup_rules.xml"
     },
     {
-        "merged": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-merged_res-85:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-main-87:\\mipmap-xhdpi\\ic_launcher_round.webp"
+        "merged": "com.example.missingpets.app-merged_res-91:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.example.missingpets.app-main-93:/mipmap-xhdpi/ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-merged_res-85:\\mipmap-anydpi_ic_launcher.xml.flat",
-        "source": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-main-87:\\mipmap-anydpi\\ic_launcher.xml"
+        "merged": "com.example.missingpets.app-merged_res-91:/drawable_circular_progress_bar.xml.flat",
+        "source": "com.example.missingpets.app-main-93:/drawable/circular_progress_bar.xml"
     },
     {
-        "merged": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-merged_res-85:\\mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-main-87:\\mipmap-hdpi\\ic_launcher_round.webp"
+        "merged": "com.example.missingpets.app-merged_res-91:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.missingpets.app-main-93:/mipmap-xxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-merged_res-85:\\mipmap-anydpi_ic_launcher_round.xml.flat",
-        "source": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-main-87:\\mipmap-anydpi\\ic_launcher_round.xml"
+        "merged": "com.example.missingpets.app-merged_res-91:/mipmap-anydpi_ic_launcher_round.xml.flat",
+        "source": "com.example.missingpets.app-main-93:/mipmap-anydpi/ic_launcher_round.xml"
     },
     {
-        "merged": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-merged_res-85:\\layout_layout_camera.xml.flat",
-        "source": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-main-87:\\layout\\layout_camera.xml"
+        "merged": "com.example.missingpets.app-merged_res-91:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.example.missingpets.app-main-93:/mipmap-hdpi/ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-merged_res-85:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-main-87:\\mipmap-xxxhdpi\\ic_launcher.webp"
+        "merged": "com.example.missingpets.app-merged_res-91:/drawable_ic_position.xml.flat",
+        "source": "com.example.missingpets.app-main-93:/drawable/ic_position.xml"
     },
     {
-        "merged": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-merged_res-85:\\mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-main-87:\\mipmap-xxhdpi\\ic_launcher.webp"
+        "merged": "com.example.missingpets.app-merged_res-91:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.missingpets.app-main-93:/mipmap-xxxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-merged_res-85:\\drawable_circular_progress_bar.xml.flat",
-        "source": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-main-87:\\drawable\\circular_progress_bar.xml"
+        "merged": "com.example.missingpets.app-merged_res-91:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.missingpets.app-main-93:/mipmap-xxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-merged_res-85:\\layout_layout_map.xml.flat",
-        "source": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-main-87:\\layout\\layout_map.xml"
-    },
-    {
-        "merged": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-merged_res-85:\\mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\Anna\\.gradle\\daemon\\8.0\\com.example.missingpets.app-main-87:\\mipmap-mdpi\\ic_launcher.webp"
+        "merged": "com.example.missingpets.app-merged_res-91:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.missingpets.app-main-93:/xml/data_extraction_rules.xml"
     }
 ]

@@ -1,10 +1,11 @@
-package com.macc.missingpets
+package com.example.missingpets
 
 object Routes {
-    const val LOGIN = "login"
-    const val REGISTER = "register"
+    const val LOGIN = "Login"
+    const val REGISTER = "Register"
     const val HOME = "Home"
     const val CHATS = "Chats"
-    const val CHAT = "chat"
+    const val CHAT = "Chat"
     const val PROFILE = "Profile"
+    const val EXIT = "Exit"
 }

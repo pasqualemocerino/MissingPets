@@ -54,7 +54,7 @@ import java.util.Locale
 
 class CreatePostActivity : ComponentActivity() {
 
-    private var user_id = 0     // verra' preso dinamicamente dall'account che ha fatto il log in
+    private var user_id = "0"     // verra' preso dinamicamente dall'account che ha fatto il log in
 
     private lateinit var photo: AppCompatImageView
     private var petName = ""

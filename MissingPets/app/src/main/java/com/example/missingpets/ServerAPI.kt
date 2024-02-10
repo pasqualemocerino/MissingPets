@@ -13,6 +13,7 @@ import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Part
 import retrofit2.http.Query
 
@@ -36,6 +37,24 @@ class ServerAPI {
         suspend fun photoGet(@Query("post_id") post_id: Int): Image
         */
 
+        // Per ottenere i post di uno specifico utente
+        @GET("/userposts")
+        suspend fun userpostsGet(@Query("user_id") user_id: String): JsonArray
+
+
+
+
+        @GET("/messages")
+        suspend fun messagesGet(@Query("userId") userId: String, @Query("chatNameId") chatNameId: String): JsonArray
+
+        @POST("/messages")
+        suspend fun messagesPost(@Body data: RequestBody): String
+
+        @GET("/chats")
+        suspend fun chatsGet(@Query("userId") userId: String): JsonArray
+
+        @PUT("/chats")
+        suspend fun chatsPut(@Body data: RequestBody): String
     }
 
     object HelperClass {            // 'object' e' un Singleton
