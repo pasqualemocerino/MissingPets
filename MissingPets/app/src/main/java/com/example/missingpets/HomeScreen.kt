@@ -170,11 +170,11 @@ fun PostElement(post: Post, navController: NavController) {
                 text = "Description: " + post.description
             )
             Text(
-                text = "User: " + post.user_id
+                text = "User: " + post.username
             )
             NavigationButton(post.position, post.address)
 
-            ChatButton(navController, post.user_id, "persona")
+            ChatButton(navController, post.user_id, post.username)
         }
     }
 

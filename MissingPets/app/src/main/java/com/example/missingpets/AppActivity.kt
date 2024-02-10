@@ -66,7 +66,7 @@ class AppActivity : ComponentActivity() {
                     //to show the bottom navigation bar
                     val navController = rememberNavController()
                     Scaffold(
-                        bottomBar = { BottomNavigationBar(navController = navController) }
+                        bottomBar = { BottomNavigationBar(user_id, username, navController = navController) }
                     ) { innerPadding ->
                         NavHost(
                             navController = navController,
@@ -167,7 +167,7 @@ enum class BottomNavItem(val route: String, val icon: ImageVector) {
 
 //define the bottom navbar
 @Composable
-fun BottomNavigationBar(navController: NavController) {
+fun BottomNavigationBar(userId:String, username: String, navController: NavController) {
     BottomNavigation(
         modifier = Modifier.background(MaterialTheme.colorScheme.primary)
     ) {
@@ -186,7 +186,10 @@ fun BottomNavigationBar(navController: NavController) {
                         }
 
                         BottomNavItem.Add -> {
-                            context.startActivity(Intent(context, CreatePostActivity::class.java ))
+                            val intent = Intent(context, CreatePostActivity::class.java)
+                            intent.putExtra("user_id", userId)
+                            intent.putExtra("username", username)
+                            context.startActivity(intent)
                         }
 
                         BottomNavItem.Chats -> {

@@ -152,7 +152,7 @@ class MatchResultActivity: ComponentActivity() {
                     text = "Description: " + post.description
                 )
                 Text(
-                    text = "User: " + post.user_id
+                    text = "User: " + post.username
                 )
             }
         }

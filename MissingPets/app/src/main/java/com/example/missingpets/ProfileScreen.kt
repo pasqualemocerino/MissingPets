@@ -192,9 +192,6 @@ fun ProfilePostElement(post: Post) {
             Text(
                 text = "Description: " + post.description
             )
-            Text(
-                text = "User: " + post.user_id
-            )
         }
     }
 

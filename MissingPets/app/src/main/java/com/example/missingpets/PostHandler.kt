@@ -23,6 +23,7 @@ import java.util.UUID
 data class Post(
     var post_id: Int,
     var user_id: String,
+    var username: String,
     var pet_name: String,
     var pet_type: String,
     var date: String,
@@ -86,7 +87,7 @@ object PostsHandler : ViewModel() {            // 'object' e' un Singleton
             // itero su tutti i post
             for (obj in json) {
                 val post = obj.asJsonArray
-                postsList.add(Post(post[0].asInt, post[1].asString, post[2].asString, post[3].asString, post[4].asString, post[5].asString, post[6].asString, post[7].asString))
+                postsList.add(Post(post[0].asInt, post[1].asString, post[2].asString, post[3].asString, post[4].asString, post[5].asString, post[6].asString, post[7].asString, post[8].asString))
             }
         } catch (e: Exception) {
             // handle exception
@@ -97,11 +98,11 @@ object PostsHandler : ViewModel() {            // 'object' e' un Singleton
     }
 
 
-    suspend fun createPost(user_id:String, petName:String, pet_type:String, date:String, position:String, description:String, photoPath:String): String {
+    suspend fun createPost(user_id:String, username:String, petName:String, pet_type:String, date:String, position:String, description:String, photoPath:String): String {
         var res = "ok"
 
         // Prepara post per l'invio (post_id e address hanno valori qualunque tanto vengono impostati bene dal server)
-        val newPost = Post(0, user_id, petName, pet_type, date, position, "", description)
+        val newPost = Post(0, user_id, username, petName, pet_type, date, position, "", description)
         val postToSend = RequestBody.create("application/json".toMediaTypeOrNull(), Gson().toJson(newPost))
 
         // Prepara foto per l'invio
@@ -150,7 +151,7 @@ object PostsHandler : ViewModel() {            // 'object' e' un Singleton
             // itero su tutti i post
             for (obj in json) {
                 val post = obj.asJsonArray
-                matchingPostsList.add(Post(post[0].asInt, post[1].asString, post[2].asString, post[3].asString, post[4].asString, post[5].asString, post[6].asString, post[7].asString))
+                matchingPostsList.add(Post(post[0].asInt, post[1].asString, post[2].asString, post[3].asString, post[4].asString, post[5].asString, post[6].asString, post[7].asString, post[8].asString))
             }
         } catch (e: Exception) {
             // handle exception
@@ -169,7 +170,7 @@ object PostsHandler : ViewModel() {            // 'object' e' un Singleton
             // itero su tutti i post
             for (obj in json) {
                 val post = obj.asJsonArray
-                userPostsList.add(Post(post[0].asInt, post[1].asString, post[2].asString, post[3].asString, post[4].asString, post[5].asString, post[6].asString, post[7].asString))
+                userPostsList.add(Post(post[0].asInt, post[1].asString, post[2].asString, post[3].asString, post[4].asString, post[5].asString, post[6].asString, post[7].asString, post[8].asString))
             }
         } catch (e: Exception) {
             // handle exception

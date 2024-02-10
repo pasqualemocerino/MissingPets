@@ -54,7 +54,8 @@ import java.util.Locale
 
 class CreatePostActivity : ComponentActivity() {
 
-    private var user_id = "0"     // verra' preso dinamicamente dall'account che ha fatto il log in
+    private var user_id = "0"     // user_id e username vengono settati dentro onCreate
+    private var username = "0"
 
     private lateinit var photo: AppCompatImageView
     private var petName = ""
@@ -100,6 +101,11 @@ class CreatePostActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         mapSelectorDialog = MapSelectorDialog(this)
+
+        // Prendi il goalLocation e l'indirizzo passati nell'intent
+        val bundle = intent.extras
+        user_id = bundle!!.getString("user_id").toString()
+        username = bundle!!.getString("username").toString()
 
         setContent {
             MissingPetsTheme {
@@ -216,7 +222,7 @@ class CreatePostActivity : ComponentActivity() {
 
                     CoroutineScope(Dispatchers.IO).launch {
                         runBlocking {
-                            val res = PostsHandler.createPost(user_id, petName, pet_type, date, position, description, getPath(photoURI))
+                            val res = PostsHandler.createPost(user_id, username, petName, pet_type, date, position, description, getPath(photoURI))
                             Log.d("Server response", res.toString())
                             // TODO: gestire errore server in base al valore di res
 
